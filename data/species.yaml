@@ -1,0 +1,767 @@
+# Yixian Formation paleobiota — game dataset
+#
+# Schema documented in data/README.md. Every entry is validated in CI.
+# This file is the single source of truth for the game's biology: codex entries,
+# spawn tables, ecology parameters, and butchery tables are all generated from it.
+#
+# confidence values: A = preserved in the fossil record
+#                    B = strongly inferred (phylogenetic bracketing / functional morphology)
+#                    C = plausible, unpreservable by nature
+#                    D = speculative but defensible
+#
+# unit: stratigraphic unit within the Yixian Formation where known.
+# Anything not from the Yixian Formation does not belong in this file.
+# See docs/01-the-science.md §7 for the exclusion list.
+
+dataset_version: "0.1.0"
+formation: "Yixian Formation"
+age_ma: [125.8, 124.1]
+paleolatitude_deg_n: 42
+
+# ─────────────────────────────────────────────────────────────────────────────
+theropods:
+
+  - genus: Sinosauropteryx
+    species: prima
+    unit: [Jianshangou, Dawangzhangzi]
+    length_m: 1.0
+    mass_kg: 1.0
+    diet: carnivore
+    integument: filamentous_feathers
+    coloration:
+      confidence: A
+      description: >
+        Ginger/rufous and white banded tail. Countershaded — dark dorsally,
+        pale ventrally. Dark "bandit mask" stripe across the eyes.
+      source: vinther_2017_countershading
+    habitat_inference:
+      confidence: A
+      value: open
+      note: >
+        Countershading style indicates open habitat in direct sunlight,
+        not closed forest. Drives biome placement.
+    game_role: [poster_animal, small_predator, prey_of_larger_theropods]
+
+  - genus: Yutyrannus
+    species: huali
+    unit: [Yixian]
+    length_m: 9.0
+    mass_kg: 1400
+    diet: carnivore
+    integument: filamentous_feathers
+    integument_note:
+      confidence: A
+      description: >
+        Filamentous feathers 15-20 cm long preserved in patches on three
+        specimens. Not flight feathers or modern down — simpler structures.
+        Largest feathered animal known.
+      source: xu_2012_yutyrannus
+    game_role: [apex_predator, regional_event]
+    population_note: >
+      Never a mob. Maximum a handful per map, named individuals, persistent
+      as full entities regardless of player proximity.
+
+  - genus: Sinocalliopteryx
+    species: gigas
+    unit: [Jianshangou]
+    length_m: 2.4
+    diet: carnivore
+    integument: filamentous_feathers
+    gut_contents:
+      confidence: A
+      prey: [Confuciusornis, Sinornithosaurus]
+      note: A directly fossilised food web. Use it.
+      source: xing_2012_sinocalliopteryx
+    game_role: [primary_threat_to_lone_human, active_hunter]
+
+  - genus: Dilong
+    species: paradoxus
+    unit: [Lujiatun]
+    length_m: 1.8
+    diet: carnivore
+    integument: filamentous_feathers
+    integument_confidence: A
+    game_role: [mid_tier_predator]
+
+  - genus: Sinornithosaurus
+    species: millenii
+    unit: [Jianshangou]
+    length_m: 1.2
+    diet: carnivore
+    integument: feathers
+    pack_behaviour:
+      confidence: D
+      note: Scales with Speculation Level. Not assumed at Strict.
+    game_role: [harassment_predator]
+
+  - genus: Zhenyuanlong
+    species: suni
+    unit: [Yixian]
+    length_m: 1.65
+    diet: carnivore
+    integument: pennaceous_feathers
+    integument_note:
+      confidence: A
+      description: Large, well-developed pennaceous wing feathers despite being flightless.
+    game_role: [harassment_predator, display_showcase]
+
+  - genus: Beipiaosaurus
+    species: inexpectus
+    unit: [Jianshangou]
+    length_m: 2.2
+    diet: herbivore
+    integument: filamentous_feathers
+    integument_note:
+      confidence: A
+      description: >
+        Preserves elongated broad filamentous feathers (EBFFs) — stiff,
+        unbranched, display structures. Highly distinctive silhouette.
+    game_role: [large_docile_herbivore, display_showcase]
+
+  - genus: Caudipteryx
+    species: zoui
+    unit: [Jianshangou]
+    length_m: 1.0
+    diet: herbivore_omnivore
+    diet_evidence:
+      confidence: A
+      note: Preserved gastroliths indicate plant processing.
+    integument: pennaceous_feathers
+    integument_note:
+      confidence: A
+      description: True pennaceous feathers on arms and a tail fan. Flightless.
+    game_role: [approachable_prey, display_showcase, feather_source]
+
+  - genus: Protarchaeopteryx
+    species: robusta
+    unit: [Jianshangou]
+    length_m: 1.0
+    diet: omnivore
+    integument: pennaceous_feathers
+    game_role: [small_prey, feather_source]
+
+  - genus: Incisivosaurus
+    species: gauthieri
+    unit: [Lujiatun]
+    length_m: 1.0
+    diet: herbivore
+    integument: feathers
+    integument_confidence: B
+    note: Prominent rodent-like incisors. Visually memorable.
+    game_role: [small_prey]
+
+  - genus: Sinovenator
+    species: changii
+    unit: [Lujiatun]
+    length_m: 1.0
+    diet: carnivore
+    integument: feathers
+    integument_confidence: B
+    game_role: [small_predator]
+
+  - genus: Mei
+    species: long
+    unit: [Lujiatun]
+    length_m: 0.5
+    diet: carnivore
+    integument: feathers
+    integument_confidence: B
+    behaviour:
+      confidence: A
+      description: >
+        Preserved in a curled, tucked sleeping posture with the snout under
+        the forelimb — identical to modern birds. Direct fossil evidence of
+        sleeping behaviour. Implement this literally.
+    game_role: [ambient, codex_highlight]
+
+  - genus: Jianianhualong
+    species: tengi
+    unit: [Dawangzhangzi]
+    length_m: 1.1
+    diet: carnivore
+    integument: pennaceous_feathers
+    integument_note:
+      confidence: A
+      description: Asymmetrical tail feathers — earliest evidence in troodontids.
+    game_role: [small_predator]
+
+  - genus: Huaxiagnathus
+    species: orientalis
+    unit: [Jianshangou]
+    length_m: 1.8
+    diet: carnivore
+    integument: filamentous_feathers
+    integument_confidence: B
+    game_role: [mid_tier_predator]
+
+  - genus: Shenzhousaurus
+    species: orientalis
+    unit: [Yixian]
+    length_m: 1.6
+    diet: omnivore_herbivore
+    integument: feathers
+    integument_confidence: B
+    note: Basal ornithomimosaur. Gastroliths preserved.
+    game_role: [fast_prey]
+
+# ─────────────────────────────────────────────────────────────────────────────
+birds:
+
+  - genus: Confuciusornis
+    species: sanctus
+    unit: [Jianshangou, Dawangzhangzi]
+    wingspan_m: 0.7
+    diet: omnivore
+    integument: feathers
+    coloration:
+      confidence: B
+      description: >
+        Trace-metal (copper) work suggests mostly dark plumage on the torso
+        with lighter or white feathers toward the wings. Preliminary.
+    dimorphism:
+      confidence: A
+      description: >
+        Elongated paired tail streamers present in some individuals only —
+        near-certainly sexual display.
+    social:
+      confidence: B
+      description: >
+        Known from mass-mortality assemblages implying very large flocks.
+        Design a colony roost set-piece around this.
+    game_role: [flock_spectacle, food, feather_source, down_source]
+
+  - genus: Changchengornis
+    species: hengdaoziensis
+    unit: [Jianshangou]
+    wingspan_m: 0.4
+    diet: omnivore
+    game_role: [ambient, small_food]
+
+  - genus: Liaoningornis
+    species: longidigitris
+    unit: [Jianshangou]
+    wingspan_m: 0.3
+    diet: insectivore
+    game_role: [ambient]
+
+  - genus: Eoenantiornis
+    species: buhleri
+    unit: [Jianshangou]
+    wingspan_m: 0.3
+    diet: omnivore
+    game_role: [ambient]
+
+# ─────────────────────────────────────────────────────────────────────────────
+ornithischians:
+
+  - genus: Psittacosaurus
+    species: lujiatunensis
+    unit: [Lujiatun]
+    length_m: 2.0
+    mass_kg: 20
+    diet: herbivore
+    integument: scales_and_quills
+    integument_note:
+      confidence: A
+      description: >
+        Scaly, with a row of long bristle-like quills on the tail (known from
+        a Jehol specimen). NOT feathered over the body.
+    coloration:
+      confidence: A
+      description: >
+        Countershaded — pale underbelly and tail, heavily pigmented chest.
+        Disruptive patterning. Dark chin and dark jugal bosses.
+      source: vinther_2016_psittacosaurus
+    habitat_inference:
+      confidence: A
+      value: closed_forest
+      note: Countershading pattern indicates dense canopy. Drives biome placement.
+    game_role: [staple_prey, domestication_candidate, herd_animal]
+
+  - genus: Jeholosaurus
+    species: shangyuanensis
+    unit: [Lujiatun]
+    length_m: 0.8
+    mass_kg: 4
+    diet: herbivore_omnivore
+    integument: scales
+    game_role: [common_small_game, primary_domestication_candidate]
+
+  - genus: Liaoceratops
+    species: yanzigouensis
+    unit: [Lujiatun]
+    length_m: 1.0
+    diet: herbivore
+    game_role: [small_prey]
+
+  - genus: Jinzhousaurus
+    species: yangi
+    unit: [Dawangzhangzi]
+    length_m: 7.0
+    mass_kg: 2000
+    diet: herbivore
+    game_role: [large_prey, sinew_source, group_hunt_target]
+
+  - genus: Bolong
+    species: yixianensis
+    unit: [Yixian]
+    length_m: 4.0
+    diet: herbivore
+    game_role: [large_prey, sinew_source]
+
+  - genus: Liaoningosaurus
+    species: paradoxus
+    unit: [Yixian]
+    length_m: 1.0
+    diet: herbivore
+    note: >
+      Small ankylosaur. Armour plating — a defensive prey animal and a source
+      of osteoderms as a material.
+    game_role: [armoured_prey, material_source]
+
+  - genus: Chuanqilong
+    species: chaoyangensis
+    unit: [Yixian]
+    length_m: 4.5
+    diet: herbivore
+    game_role: [armoured_prey]
+
+# ─────────────────────────────────────────────────────────────────────────────
+sauropods:
+
+  - genus: Dongbeititan
+    species: dongi
+    unit: [Yixian]
+    length_m: 15.0
+    diet: herbivore
+    game_role: [living_terrain]
+    design_note: >
+      Effectively unkillable. Treat as a landscape feature: trampled paths,
+      browsed canopy, dung supporting an insect economy.
+
+# ─────────────────────────────────────────────────────────────────────────────
+pterosaurs:
+
+  - genus: Eosipterus
+    species: yangi
+    unit: [Yixian]
+    wingspan_m: 1.2
+    diet: piscivore
+    integument: pycnofibres
+    integument_confidence: B
+    game_role: [ambient_lakeside]
+
+  - genus: Haopterus
+    species: gracilis
+    unit: [Jianshangou]
+    wingspan_m: 1.35
+    diet: piscivore
+    integument: pycnofibres
+    game_role: [ambient_lakeside]
+
+  - genus: Dendrorhynchoides
+    species: curvidentatus
+    unit: [Jianshangou]
+    wingspan_m: 0.4
+    diet: insectivore
+    integument: pycnofibres
+    game_role: [ambient_forest]
+
+  - genus: Boreopterus
+    species: cui
+    unit: [Yixian]
+    wingspan_m: 1.45
+    diet: filter_feeder_piscivore
+    game_role: [ambient_lakeside]
+
+  - genus: Beipiaopterus
+    species: chenianus
+    unit: [Yixian]
+    wingspan_m: 1.5
+    diet: piscivore
+    game_role: [ambient_lakeside]
+
+# ─────────────────────────────────────────────────────────────────────────────
+mammals:
+
+  - genus: Repenomamus
+    species: robustus
+    unit: [Lujiatun]
+    length_m: 0.6
+    mass_kg: 6
+    diet: carnivore
+    integument: fur
+    gut_contents:
+      confidence: A
+      prey: [Psittacosaurus_juvenile]
+      source: hu_2005_repenomamus
+    game_role: [store_raider, nest_predator, domestication_candidate]
+    design_note: >
+      The best antagonist in the game because it is small. Threatens food
+      stores, eggs, hatchlings and livestock rather than the player. Makes
+      storage architecture matter. Commensal-scavenger profile = the exact
+      route by which real domestication happened.
+
+  - genus: Repenomamus
+    species: giganticus
+    unit: [Lujiatun]
+    length_m: 1.0
+    mass_kg: 13
+    diet: carnivore
+    integument: fur
+    game_role: [store_raider, genuine_threat_to_children_and_injured]
+
+  - genus: Eomaia
+    species: scansoria
+    unit: [Yixian]
+    length_m: 0.15
+    diet: insectivore
+    integument: fur
+    note: Among the earliest known eutherians. Codex highlight.
+    game_role: [ambient, small_food]
+
+  - genus: Sinodelphys
+    species: szalayi
+    unit: [Yixian]
+    length_m: 0.15
+    diet: insectivore
+    integument: fur
+    game_role: [ambient]
+
+  - genus: Jeholodens
+    species: jenkinsi
+    unit: [Jianshangou]
+    length_m: 0.15
+    diet: insectivore
+    integument: fur
+    game_role: [ambient]
+
+  - genus: Gobiconodon
+    species: null
+    unit: [Yixian]
+    length_m: 0.4
+    diet: carnivore
+    integument: fur
+    game_role: [small_predator, store_raider]
+
+  - genus: Zhangheotherium
+    species: quinquecuspidens
+    unit: [Jianshangou]
+    length_m: 0.2
+    diet: insectivore
+    integument: fur
+    venom:
+      confidence: D
+      description: >
+        Possesses a tarsal spur comparable to the venomous spur of the male
+        platypus. Venom is inferred, not demonstrated. Strict mode omits it.
+    game_role: [ambient, hazard_at_rich_speculation]
+
+  - genus: Liaoconodon
+    species: hui
+    unit: [Yixian]
+    length_m: 0.35
+    diet: carnivore
+    integument: fur
+    game_role: [small_predator]
+
+# ─────────────────────────────────────────────────────────────────────────────
+reptiles_and_amphibians:
+
+  - genus: Hyphalosaurus
+    species: lingyuanensis
+    unit: [Yixian]
+    length_m: 1.5
+    diet: piscivore
+    habitat: aquatic
+    note: >
+      Long-necked choristodere with 18+ cervical vertebrae, paddle-like limbs,
+      laterally compressed tail. Visually alien. Abundant.
+    game_role: [aquatic_prey]
+
+  - genus: Monjurosuchus
+    species: splendens
+    unit: [Jianshangou]
+    length_m: 0.4
+    diet: carnivore
+    habitat: semi_aquatic
+    soft_tissue:
+      confidence: A
+      description: Preserved soft tissue shows webbed feet and smooth skin.
+    game_role: [aquatic_prey]
+
+  - genus: Manchurochelys
+    species: manchoukuoensis
+    unit: [Yixian]
+    length_m: 0.3
+    diet: omnivore
+    habitat: aquatic
+    game_role: [food, shell_as_container]
+
+  - genus: Ordosemys
+    species: null
+    unit: [Yixian]
+    length_m: 0.3
+    habitat: aquatic
+    game_role: [food, shell_as_container]
+
+  - genus: Dalinghosaurus
+    species: longidigitus
+    unit: [Yixian]
+    length_m: 0.3
+    diet: insectivore
+    note: Long-toed, likely a fast runner and possibly a swimmer.
+    game_role: [ambient]
+
+  - genus: Yabeinosaurus
+    species: tenuis
+    unit: [Yixian]
+    length_m: 0.4
+    diet: insectivore
+    reproduction:
+      confidence: A
+      description: A specimen preserves embryos — viviparous or ovoviviparous.
+    game_role: [ambient]
+
+  - genus: Liaobatrachus
+    species: null
+    unit: [Yixian]
+    length_m: 0.08
+    diet: insectivore
+    habitat: semi_aquatic
+    game_role: [ambient, small_food]
+
+  - genus: Jeholotriton
+    species: paradoxus
+    unit: [Yixian]
+    length_m: 0.1
+    diet: insectivore
+    habitat: aquatic
+    note: Gilled, neotenic salamander.
+    game_role: [ambient]
+
+  - genus: Sinerpeton
+    species: fengshanensis
+    unit: [Yixian]
+    length_m: 0.1
+    habitat: aquatic
+    game_role: [ambient]
+
+  - genus: Liaoxitriton
+    species: zhongjiani
+    unit: [Yixian]
+    length_m: 0.15
+    habitat: aquatic
+    game_role: [ambient]
+
+# ─────────────────────────────────────────────────────────────────────────────
+fish:
+
+  - genus: Lycoptera
+    species: davidi
+    unit: [Jianshangou, Dawangzhangzi]
+    length_m: 0.1
+    diet: planktivore
+    habitat: lacustrine
+    abundance: superabundant
+    note: >
+      Index fossil and the most abundant vertebrate in the formation.
+      Part of the classic EEL index assemblage.
+    game_role: [protein_floor, oil_source, shoaling, net_and_weir_target]
+    design_note: >
+      This animal is what actually keeps the player alive. Rendered for oil
+      it also addresses the fat requirement. Balance the nutrition model
+      around Lycoptera availability by season.
+
+  - genus: Peipiaosteus
+    species: pani
+    unit: [Yixian]
+    length_m: 0.3
+    diet: benthic_feeder
+    habitat: lacustrine
+    note: Acipenseriform — a sturgeon relative.
+    game_role: [food, oil_source]
+
+  - genus: Protopsephurus
+    species: liui
+    unit: [Yixian]
+    length_m: 1.0
+    diet: filter_feeder
+    habitat: lacustrine
+    note: Early paddlefish.
+    game_role: [prize_catch, large_oil_source]
+
+  - genus: Jinanichthys
+    species: null
+    unit: [Yixian]
+    length_m: 0.12
+    habitat: lacustrine
+    game_role: [food]
+
+  - genus: Yanosteus
+    species: longidorsalis
+    unit: [Yixian]
+    length_m: 0.4
+    habitat: lacustrine
+    game_role: [food]
+
+# ─────────────────────────────────────────────────────────────────────────────
+invertebrates:
+
+  - genus: Pseudopulex
+    species: magnus
+    unit: [Yixian]
+    length_mm: 22.8
+    type: ectoparasite
+    note: >
+      Flea-like ectoparasite, roughly ten times the size of a modern flea,
+      with elongate serrated piercing stylets. Fed on feathered and haired
+      vertebrates. A related Jehol species preserves a distended abdomen
+      from a blood meal ~15x that of a modern flea.
+    confidence: A
+    source: huang_2012_fleas
+    game_role: [parasite_pressure, sedentism_counterweight]
+    design_note: >
+      Drives the parasite-load system. Accumulates with settlement duration.
+      Countered by smoke, winter freezing of bedding, burning old bedding,
+      aromatic conifer boughs, and seasonal camp movement.
+
+  - genus: Ephemeropsis
+    species: trisetalis
+    unit: [Yixian]
+    type: mayfly
+    abundance: superabundant
+    note: Index fossil. Part of the EEL assemblage. Mass emergences.
+    game_role: [seasonal_spectacle, fish_feeding_trigger, human_food]
+
+  - genus: Eosestheria
+    species: null
+    unit: [Yixian]
+    type: clam_shrimp
+    abundance: superabundant
+    note: Index fossil. Part of the EEL assemblage.
+    game_role: [reliable_low_value_food, ephemeral_pool_blooms]
+
+  - genus: Coptoclava
+    species: longipoda
+    unit: [Yixian]
+    type: predatory_aquatic_beetle
+    length_mm: 50
+    game_role: [shallow_water_hazard, bait]
+
+  - genus: Sinaeschnidia
+    species: null
+    unit: [Yixian]
+    type: dragonfly
+    game_role: [ambient]
+
+  - genus: Vitimopsyche
+    species: null
+    unit: [Yixian]
+    type: long_proboscid_scorpionfly
+    note: >
+      Mesozoic gymnosperm pollinator. Pure ambience, and exactly the kind of
+      detail that earns credibility with specialists.
+    game_role: [ambient, codex_highlight]
+
+  - genus: Chresmoda
+    species: null
+    unit: [Yixian]
+    type: water_strider_analogue
+    game_role: [ambient]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Flora. See docs/01-the-science.md §4 — the Carbohydrate Problem.
+# NOTE: there is NO GRASS. Audit every art asset against this list.
+flora:
+
+  conifers:
+    - genus: Liaoningocladus
+      species: boii
+      uses: [timber, bark_bast_cordage, resin, cambium_food]
+    - genus: Podozamites
+      uses: [timber, cambium_food]
+    - genus: Elatides
+      uses: [timber, resin]
+    - genus: Schizolepis
+      uses: [timber, seeds]
+    - genus: Pityostrobus
+      uses: [seeds, resin]
+    - family: Cheirolepidiaceae
+      note: Classopollis pollen producers. Drought-tolerant. Open/scrub biome.
+    - family: Araucariaceae
+      uses: [timber, seeds]
+    - family: Pinaceae
+      uses: [timber, resin, seeds, needle_infusion_vitamin_c]
+
+  ginkgoales:
+    - genus: Ginkgoites
+      uses: [seeds_food_toxin_limited, timber]
+      toxin:
+        name: antivitamin_b6
+        effect: Cumulative. Caps safe daily intake. Cannot be a staple.
+    - genus: Baiera
+    - genus: Sphenobaiera
+
+  czekanowskiales:
+    - genus: Czekanowskia
+    - genus: Solenites
+    - genus: Phoenicopsis
+
+  bennettitales:
+    - genus: Ptilophyllum
+      uses: [seeds_food_requires_leaching]
+    - genus: Otozamites
+    - genus: Zamites
+
+  cycadales:
+    - genus: Nilssonia
+      uses: [seeds_food_requires_leaching]
+      toxin:
+        name: cycasin
+        effect: >
+          Requires repeated soaking in changed water over days. Needs
+          watertight vessels — this is why ceramics gates the plant economy.
+
+  ferns:
+    - genus: Coniopteris
+      uses: [fiddleheads_food, rhizome_food, bedding]
+      toxin: { name: thiaminase, effect: Destroyed by cooking. Chronic raw intake causes beriberi. }
+    - genus: Onychiopsis
+    - genus: Ruffordia
+    - genus: Adiantopteris
+
+  equisetales:
+    - genus: Equisetites
+      uses: [abrasive_scouring_rush, marginal_food, wattle_binder]
+      note: Silica-rich. Genuinely better as a tool than a food.
+
+  lycopodiales:
+    - genus: Selaginellites
+      uses: [ground_cover]
+
+  gnetales:
+    - genus: Chengia
+      species: laxispicata
+    - genus: Liaoxia
+    - genus: Ephedrites
+      uses: [stimulant_bronchodilator]
+      confidence: C
+
+  angiosperms:
+    - genus: Archaefructus
+      species_count: 3
+      habitat: aquatic
+      uses: [trivial_calories]
+      note: >
+        One of only ~5 angiosperm species in the entire formation. An aquatic
+        herb. This is the sum total of flowering plants available.
+    - genus: Hyrcantha
+      synonym: Sinocarpus
+
+  excluded:
+    - genus: Archaeamphora
+      reason: >
+        Shown in 2015 not to be a carnivorous angiosperm, and probably not an
+        angiosperm at all. Do not include.
+      source: li_2015_archaeamphora
