@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A67BB856-B5F3-49FE-99E6-512D105E578F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderWorld.Core", "src\ElderWorld.Core\ElderWorld.Core.csproj", "{D14DEC8E-42EF-4F30-ADAB-00017F659578}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1A15D0FE-9539-42E6-8CA9-4A3474FA0987}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderWorld.Core.Tests", "tests\ElderWorld.Core.Tests\ElderWorld.Core.Tests.csproj", "{F8859013-13E3-4C85-B22F-6F76DBC7574A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElderWorld.Game", "game\ElderWorld.Game.csproj", "{E0AAF973-EE6A-4823-8519-81BC4D996D14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D14DEC8E-42EF-4F30-ADAB-00017F659578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14DEC8E-42EF-4F30-ADAB-00017F659578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14DEC8E-42EF-4F30-ADAB-00017F659578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14DEC8E-42EF-4F30-ADAB-00017F659578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8859013-13E3-4C85-B22F-6F76DBC7574A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8859013-13E3-4C85-B22F-6F76DBC7574A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8859013-13E3-4C85-B22F-6F76DBC7574A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8859013-13E3-4C85-B22F-6F76DBC7574A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0AAF973-EE6A-4823-8519-81BC4D996D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AAF973-EE6A-4823-8519-81BC4D996D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0AAF973-EE6A-4823-8519-81BC4D996D14}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0AAF973-EE6A-4823-8519-81BC4D996D14}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D14DEC8E-42EF-4F30-ADAB-00017F659578} = {A67BB856-B5F3-49FE-99E6-512D105E578F}
+		{F8859013-13E3-4C85-B22F-6F76DBC7574A} = {1A15D0FE-9539-42E6-8CA9-4A3474FA0987}
+	EndGlobalSection
+EndGlobal

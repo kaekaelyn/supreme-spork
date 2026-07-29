@@ -1,0 +1,27 @@
+# ── .NET ────────────────────────────────────────────────────────────────────
+bin/
+obj/
+*.user
+*.userprefs
+*.suo
+.vs/
+.idea/
+
+# ── Godot ───────────────────────────────────────────────────────────────────
+# The import and build cache. Regenerated on open; never commit it.
+.godot/
+.import/
+
+# Godot writes its own solution next to project.godot if you let the editor
+# create one. The solution of record is ElderWorld.sln at the repository root.
+game/*.sln
+
+# Export artefacts and per-machine export configuration.
+export_presets.cfg
+/builds/
+
+# ── Editor and OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*~
