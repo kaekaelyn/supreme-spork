@@ -2,6 +2,10 @@
 
 The ambition here is concentrated in **simulation and time**, not content volume. That's a good place for it, because simulation scales without an art team — but the 1:1 clock creates development problems that need solving early rather than discovered late.
 
+> **Solo development note.** This document was written against a small-studio team shape (§5), which remains the description of what the *full* design would take. Actual production is one person with AI assistance and **no deadline**, which changes the sequencing but not the destination: the scope is not capped, only the **starting slice** is. The concrete asset pipeline, tool stack, and stage-by-stage order of work live in [09 — Assets & Production](09-assets-and-production.md), which supersedes this document wherever the two disagree about *how* and *when*.
+>
+> The starting slice: one valley, six creatures, one year, tiers 0–4, solo plus small co-op. Everything else is expansion, and with no deadline, expansion never has to stop.
+
 ---
 
 ## 1. Prove the thesis first: the Cold Open prototype

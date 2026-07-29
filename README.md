@@ -49,6 +49,7 @@ You may not know where you are. You may not know *when* you are. Nothing in the 
 | [06 — Technical Architecture](docs/06-technical-architecture.md) | Engine, ecology core, always-on server, world generation, data pipeline |
 | [07 — Roadmap](docs/07-roadmap.md) | Prototype and vertical slice scope, team, risks |
 | [08 — Decisions](docs/08-decisions.md) | Settled design decisions and their reasoning |
+| [09 — Assets & Production](docs/09-assets-and-production.md) | The solo/AI-assisted production manual: pipeline, tools, order of work |
 | [SOURCES.md](SOURCES.md) | Every scientific claim, cited, with verification status |
 | [data/](data/) | The paleobiota as versioned, open, machine-readable data |
 
