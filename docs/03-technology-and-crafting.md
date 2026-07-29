@@ -105,6 +105,10 @@ The Journal is a craftable, physical, losable object. In it you can:
 - **Name things.** Every animal, plant, place, star, and season gets whatever name you give it, and that name is what appears on your own maps and marks. In multiplayer, whether the settlement adopts your name for the big striped one is a social question, not a mechanical one.
 - **Tabulate.** Tally marks, day counts, measurements. This is how you catch the 374-day year.
 
-A settlement's accumulated journals are its science — and its scripture, if that is the direction it goes. Copying a journal is slow, deliberate work and the only insurance against losing it. Somebody will eventually build a dry, stone-walled, fire-separated room to keep them in, and that will be a library, and nobody will have told them to.
+A settlement's accumulated journals are its science — and its scripture, if that is the direction it goes.
+
+**Journals are physical and mortal.** Ochre fades, bark rots, hide cracks and gets eaten, and fire does what fire does. Copying is the only insurance, it is slow deliberate work, and **it introduces errors** — a copy of a copy is not what was written. Degradation must produce *ambiguity rather than deletion*: a smudged number, a missing word, a diagram whose key is gone. Players arguing over what a dead person meant is the point; a blank page is just a punishment. The full reasoning is in [05 §3a](05-society-and-multiplayer.md#3a-transmission-decay-and-how-myth-actually-forms).
+
+Because media differ in lifespan — bark dies with you, ochre on sheltered rock lasts generations, incision into stone is close to forever and costs days — **choosing what to carve in stone is choosing what your settlement thinks is eternal.** That is how monuments happen, with nobody telling anyone to build one. And somebody will eventually build a dry, stone-walled, fire-separated room to keep the journals in, and that will be a library, and nobody will have told them to do that either.
 
 The scientific rigour of this game lives entirely in [the world itself](01-the-science.md) and in the [public dataset](../data/). It never speaks to the player. What the player gets is a pen.

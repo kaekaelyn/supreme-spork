@@ -32,6 +32,8 @@ What it *generates* is the best social content in the game. A settlement that ha
 
 Whatever the settlement does the *second* time will be shaped by how the first time went. That is a tradition — invented at the table, about the only unexplained thing in the world, with real costs attached. This is exactly the "building culture from the ground up" the premise asks for, and it emerges from a respawn rule.
 
+**Arrival is also induction.** A stranger joining a settlement that is already three years old inherits its customs, its symbol set, its journals, and its rules-whose-reasons-are-gone — none of which they had any part in making. They are not a child raised on the stories, but they are taught them, by people who were taught them, and that produces much the same thing. See [§3a](#3a-transmission-decay-and-how-myth-actually-forms).
+
 ## 3. Writing — two layers
 
 You are a 21st-century person. **You can write**, and that is one of the very few things a transplant could definitely do from day one. But writing is slow, materials are scarce, and — critically — [a written record transmits the concept, not the skill](03-technology-and-crafting.md#4-knowledge-as-a-physical-object).
@@ -43,6 +45,34 @@ You are a 21st-century person. **You can write**, and that is one of the very fe
 Glyphs do what prose can't: trail marks, territory posts, warnings, ownership, boundaries, and — inevitably — the settlement's symbolic and ritual vocabulary. Nothing in the system is authored by us. A server's symbol set is entirely its own, unintelligible to outsiders, and can be lost.
 
 **Personal marks.** Every player designs a signature glyph. It appears on things they make. A well-made spear point carries its maker's mark forever, and long after that person is gone a stranger finds it and doesn't recognise the mark.
+
+## 3a. Transmission, decay, and how myth actually forms
+
+The generational texture — people living by knowledge handed down from somewhere else, until the reasons are gone and only the practice remains — does not require children, births, or NPCs. It requires **lossy transmission**, and that is a system.
+
+**Myth is a rule that outlived its reason.** Someone learns the hard way that the seeds have to be soaked four times, and writes it down with the reason attached. Four characters later, the writer is long dead, nobody in living memory has been poisoned, and *soak them four times* is simply what one does. Nobody can say why. Somebody eventually decides it is because of something else entirely. That is not roleplay dressing — it is what the transmission systems produce on their own, if we build them honestly.
+
+Three mechanisms do the work:
+
+**Teaching transmits technique, not reason.** When you demonstrate a skill, the learner's hands get better. They do not receive *why* any step is there. Practices therefore propagate stripped of rationale by default, and the only way to move a reason is to say it out loud or write it down — both of which are optional, effortful, and frequently skipped.
+
+**Records degrade, and copies drift.** Ochre fades. Bark rots. Hide cracks and is eaten. At 1:1, a bark journal genuinely deteriorating across three real years is materially honest rather than punitive. Copying is the counter, and copying is slow, deliberate work that **introduces errors** — a copy of a copy is not what was written. This is exactly how real manuscript transmission behaved.
+
+> **Design guard:** degradation must produce *ambiguity*, not deletion. A blank page is a punishment. A page that still says something, which you can no longer fully interpret, is the entire point. Damaged text should be legible-but-uncertain — a missing word, a smudged number, a diagram whose key is gone. Players will argue about what it meant, and that argument is the game.
+
+**The medium is a statement about permanence.** Bark is cheap and dies with you. Hide lasts a while. Ochre on a sheltered rock face lasts generations. Incision into stone is close to forever, and costs days. So the act of choosing what to carve into rock is the act of deciding what your settlement believes is eternal — and that is how monuments happen, without anyone being told to build one.
+
+### The generation gap is made of player turnover
+
+The honest version of what you get: at 1:1, a server that takes three real years to see three winters will absolutely have players who joined in winter two. To them, the founders' journals are historical documents about a time they were not present for, written by people they never met, in a settlement whose customs already existed when they arrived. They did not grow up on those stories — they were **inducted** into them, which produces the same result by a different route. You accept practices you did not originate and cannot verify, because the people who were here first do it that way.
+
+And under permadeath, this happens to founding players too. The human at the keyboard remembers year one. Their fourth character did not live it.
+
+### What this genuinely cannot give you
+
+One thing, and it should be said plainly rather than glossed: **no character will ever be a person who never saw the 21st century.** Everyone wakes disoriented and everyone brings a modern mind. There is no native generation, and the myth that forms will always be modern people mythologising *each other* rather than a second generation mythologising the first.
+
+That is a real loss and there is no version of this that keeps it without either NPCs or reproduction. But the compensation is that the myth-formation itself is genuine, mechanical, and unscripted — and no game has done that part at all.
 
 ## 4. Permadeath and what survives you
 

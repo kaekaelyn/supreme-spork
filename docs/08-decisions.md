@@ -38,6 +38,10 @@ Soft option: partial skill inheritance, off by default.
 
 No breeding, no children, no NPCs. New players and returning dead **wake naked and alone somewhere in the world**, exactly as the first person did, at whatever hour and season it currently is. One rule answers reproduction, growth, and respawn without a word of explanation — and it generates the best social content in the game, because eventually a settlement finds a naked stranger at its edge in the snow and has to decide, twice, what it does about that.
 
+**The generational texture comes from transmission loss, not from births.** The goal — knowledge handed down until the reasons are gone and only the practice remains — is achievable without a native generation, because myth is a rule that outlived its reason, and that is a system rather than a population. Teaching transmits technique without rationale; records degrade into ambiguity; copies of copies drift. Combined with permadeath and, at 1:1, genuine player turnover across real years, a settlement accumulates practices nobody can justify and documents nobody can fully read. See [05 §3a](05-society-and-multiplayer.md#3a-transmission-decay-and-how-myth-actually-forms).
+
+**The acknowledged loss:** no character will ever be someone who never saw the 21st century. Everyone arrives with a modern mind, so the myth that forms is always modern people mythologising each other rather than a second generation mythologising the first. There is no version of this that keeps that texture without NPCs or reproduction, and both cost more than they return.
+
 ### 6. Information — none. Ever.
 
 No names for anything. No codex, no bestiary, no field guide, no tooltips, no recipes, no tech tree, no date, no location, no framing device. You may reasonably conclude you are on another planet and the game will never correct you.
