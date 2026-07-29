@@ -68,6 +68,42 @@ Ginger and white banded tail, bandit mask, countershaded, from melanosome eviden
 
 ### 10. Title — **The Elder World**.
 
-### 11. Open dataset — yes, permissively licensed, published separately, loudly.
+### 11. Open dataset — yes in principle. **Licensing deferred.**
 
-Working paleontologists will correct it for free, which is worth more than any consultant. It converts the project's biggest credibility risk into a community asset, makes "the game updates when the science updates" verifiable rather than a claim, and — now that nothing is explained in-game — carries the entire educational contribution on its own.
+Working paleontologists will correct it for free, which is worth more than any consultant. It converts the project's biggest credibility risk into a community asset and — now that nothing is explained in-game — carries the entire educational contribution on its own.
+
+**Superseded in part by §14:** publication and licensing are deferred until there is something worth publishing. The dataset is built to be publishable (citations, confidence tiers, versioning) so the option stays open at no cost.
+
+---
+
+## Production decisions
+
+### 12. Engine — **Godot 4**, revised.
+
+Cost is not the deciding factor, because **all three candidates are free for a non-commercial project**: Unreal is free with a 5% royalty only above $1M gross revenue (the $1,850/seat Unreal Subscription applies to *non-game* industries — archviz, film — not to us); Unity Personal is free under $200k revenue with the runtime fee cancelled in 2024; Godot is MIT with no threshold, royalty, or tier of any kind.
+
+What decided it was **Megascans ceasing to be free**. Epic's free-for-Unreal arrangement ended at the close of 2024 and the Quixel-to-Fab migration completed in 2026; new assets are now individually priced or subscription-gated. Free access to photogrammetric rock, bark, moss, and snow was the single strongest argument for Unreal *for this project*, since it would have solved most of the environment art at no cost. Without it, Unreal's remaining edge is Nanite, Lumen, and PCG — real, but no longer decisive against its costs in learning curve, iteration speed, and hardware.
+
+Against that, Godot offers: zero cost with no strings for a multi-year project, fast iteration, a small readable codebase you can modify yourself, and C# support that keeps the simulation testable. Critically, **the stylized art direction in [09 §1.3](09-assets-and-production.md#13-style-is-a-consistency-enforcement-mechanism-not-just-taste) is well within Godot's capability** — the photoreal path was the one that needed Unreal, and we already decided against photoreal for independent reasons.
+
+**Known costs of this choice**, accepted with open eyes: no Nanite, so AI-generated meshes need decimation and LODs (automatable in Blender, but a real pipeline step); weaker terrain and foliage tooling, much of it community-maintained; a thinner 3D tutorial ecosystem; and more of the multiplayer layer built by hand.
+
+**Fallback if Godot proves insufficient:** Unity 6 — free under $200k, the largest solo-dev tutorial ecosystem, pleasant C#, and the engine *The Long Dark* itself was built in, which is our stated visual reference.
+
+### 13. Ecology core — same language as the engine, but isolated as a module.
+
+Pragmatism wins for a solo project: one language, no FFI boundary, no cross-language debugging. With Godot that means **C#**.
+
+**The one discipline to keep:** the ecology core lives in its own assembly with **no engine types in it** — no `Node`, no `Vector3` from the engine, no scene tree. Same language, zero engine coupling. This costs almost nothing to maintain and preserves both things the engine-independent design was for: headless soak tests that simulate centuries in seconds without launching the engine ([06 §9](06-technical-architecture.md#9-testing-strategy)), and the portability insurance if the engine choice is ever revisited.
+
+### 14. Licensing — everything private for now.
+
+No public dataset, no published code, no license file yet. Deferred until there is something worth publishing, which costs nothing now.
+
+Two notes for whenever it is revisited: a repository with no license is all-rights-reserved by default, so nothing leaks by inaction; and the credibility benefit of the open dataset arrives only once it is public, so earlier publication buys earlier correction. Recommended when the time comes: **CC-BY-4.0** for the dataset, since attribution matches how researchers expect to cite data, and **MIT** for any tooling.
+
+### Not a decision: writing our own engine.
+
+Raised as a cost-saving measure, and it saves nothing — every candidate engine is already free. It would cost years of work that produces no game, on a project whose scarce resource is already the *art*, not the technology.
+
+The honest middle path, and part of why Godot fits: **Godot is MIT-licensed and its source is small enough to read and modify.** You can change the engine where it doesn't do what you need, which is most of the appeal of writing one, without the multi-year detour of starting from nothing.
