@@ -6,18 +6,15 @@ Opinionated recommendations, with reasoning. Every one of these is arguable and 
 
 ## 1. Engine
 
-**Recommendation: Unreal Engine 5.4+.**
-
-The reasoning is specific to this project rather than generic:
-
-- The setting is a **dense conifer forest**, which is the single hardest thing to render well and the single most important thing to get right. Nanite handles high-polygon vegetation and Lumen handles the volumetric under-canopy light that makes a boreal forest feel like a boreal forest. This is a large fraction of the game's emotional impact.
-- Snow accumulation, volumetric fog, atmospheric scattering for the high-altitude sky, and weather are strong out of the box.
-- Its animation tooling matters because **feather behaviour** — fluffing, flattening, snow shedding, preening — is a headline feature.
-- Dedicated server builds are first-class and the replication model is mature.
-
-**Honest counterarguments.** Unity is cheaper to iterate in and better at data-oriented simulation via DOTS, which matters because *our hardest problem is simulation, not rendering*. Godot 4 is free, pleasant, and increasingly viable, but its ecosystem for a project of this fidelity is thin. If the team is under five people, **Unity is the safer answer** and the fidelity loss is survivable. If the team is 10+ and visual fidelity is a marketing pillar, Unreal.
+**Settled: Godot 4, C#.** See [decision 12](08-decisions.md#12-engine--godot-4-revised) for the reasoning and its date — this section originally recommended Unreal and is kept below only as the superseded reasoning trail. Nothing past this point should be read as current guidance; treat every "Unreal" and "Nanite/Lumen" reference in this document and in [09](09-assets-and-production.md) as historical unless a passage explicitly says otherwise.
 
 **Critical architectural rule regardless of engine: the ecology simulation must not live in the engine.** See §2.
+
+### Superseded reasoning (Unreal, pre-decision-12)
+
+The original recommendation was Unreal Engine 5.4+, on the strength of Nanite for high-polygon vegetation, Lumen for under-canopy light, mature dedicated-server tooling, and — the argument decision 12 records as having actually decided it — free Megascans access, which "would have solved most of the environment art at no cost." That stopped being true when Epic's free-for-Unreal Megascans arrangement ended at the close of 2024 (the Quixel-to-Fab migration completed in 2026). Without it, Nanite/Lumen/PCG were real advantages but no longer decisive against Unreal's cost in learning curve, iteration speed, and hardware — especially since the [stylised, non-photoreal art direction](09-assets-and-production.md#13-style-is-a-consistency-enforcement-mechanism-not-just-taste) never needed Nanite or Lumen the way a photoreal pipeline would have.
+
+Known costs of the Godot choice, accepted with open eyes: no Nanite, so AI-generated meshes need decimation and LODs (automatable in Blender, but a real pipeline step); weaker terrain and foliage tooling, much of it community-maintained; a thinner 3D tutorial ecosystem; and more of the multiplayer layer built by hand. Fallback if Godot proves insufficient: Unity 6 — free under $200k, the largest solo-dev tutorial ecosystem, and the engine *The Long Dark* itself was built in.
 
 ## 2. The two-tier simulation — the core technical bet
 
