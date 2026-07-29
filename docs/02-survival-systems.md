@@ -48,7 +48,7 @@ We track **four** nutritional axes rather than one hunger bar:
 - Ginkgoalean seeds carry an antivitamin-B6 compound; safe in moderation, dangerous as a staple.
 - Ferns and horsetails carry **thiaminase**; cooking destroys most of it, chronic raw intake causes beriberi.
 
-None of this is explained in a tooltip. The codex fills in as you observe effects.
+None of this is explained anywhere. You will work out that the seeds are making you ill by getting ill, and the only place that knowledge can be stored is [your own written record](05-society-and-multiplayer.md#3-writing-two-layers).
 
 ### Seasonal food calendar
 
@@ -90,16 +90,74 @@ They will also feed on you.
 
 Other health systems:
 
-- **Wound infection.** Injuries introduce infection risk scaled by wound type and hygiene. Treatment is limited: heat, cleaning, and a small pharmacopoeia of genuinely-present plants (conifer resin is antimicrobial and was used this way; *Ephedra*-relatives are stimulants and bronchodilators — worth a codex note but handle carefully).
+- **Wound infection.** Injuries introduce infection risk scaled by wound type and hygiene. Treatment is limited: heat, cleaning, and a small pharmacopoeia of genuinely-present plants (conifer resin is antimicrobial and was used this way; *Ephedra*-relatives are stimulants and bronchodilators — plausible, and worth including, but the effect should be discovered rather than signposted).
 - **Broken bones.** Splint and immobilise. Weeks of reduced capability. In multiplayer, this makes you **dependent on other players**, which is the best possible way to generate social structure without a social mechanic.
 - **Smoke inhalation, falls, drowning, cold-water shock, H₂S in hollows.** The environment should be more lethal than the animals, always.
 
-## 6. Time, day length, and seasons
+## 6. Time — the 1:1 world clock
 
-- Day length is scaled to a **23.4-hour** Cretaceous day (see [01 §8](01-the-science.md#8-the-sky)).
-- **Default year length: 6 real hours**, server-configurable from 2 to 40. Winter is disproportionately long (~35% of the year) because winter is the content.
-- Snow **accumulates and persists** with depth affecting movement, tracking (footprints in snow are a huge gameplay layer — you can track animals *and be tracked*), and structure loads.
-- Lakes freeze progressively: thin ice that breaks, then walkable ice, then thick ice you must chop through to fish. Spring break-up is dangerous and dramatic.
+**The world clock runs in real time and never stops.** This is the game's most consequential decision after the climate, and everything else bends around it.
+
+### The numbers
+
+| Quantity | Value | Where it comes from |
+|---|---|---|
+| **Day** | **23.4 real hours** | Tidal deceleration of ~1.7 ms/century over 125 Myr |
+| **Year** | **~374.6 days**, which is **one real year** | Orbital period is essentially unchanged; 8,766 h ÷ 23.4 h |
+| **Lunar month** | **~30 days** | Moon ~0.3% closer, so a marginally shorter synodic month |
+| **Winter** | **~4–5 real months** below freezing | 42° N paleolatitude at ~2,000 m |
+
+A season lasts as long as a season lasts. A settlement that has stood for three real years has survived three real winters, and everyone who was there knows it.
+
+### The precession gift
+
+This is the detail that makes 1:1 viable, and it falls out of the science for free.
+
+Because the Cretaceous day is 23.4 hours and the real day is 24, **in-game time-of-day drifts against real time by about 37 minutes per real day.** A player who only ever plays 8pm to midnight is *not* locked into perpetual darkness: their slice of the world's day slides steadily earlier, completing a full circuit through dawn, noon, dusk, and midnight roughly **every 40 real days.**
+
+The single worst failure mode of a real-time clock — your schedule pinning you to one time of day forever — is solved by an accurate scientific detail, at no design cost. Do not round the day to 24 hours. The 0.6-hour difference is doing enormous work.
+
+### The 374-day trap
+
+**You know a year is 365 days. It is not.** It is about 374.6.
+
+A player who builds a calendar on 365 will drift by ten days a year, misjudge the solstice, and be wrong about when winter starts — which, in this game, is a way to die. The only fix is to measure the year yourself, by watching where the sun rises against the ridge line across a full cycle. Nothing hints at this. It is the purest expression of [the Transplant pillar](00-the-transplant.md#1-knowledge-without-skill): your modern knowledge is not just insufficient, it is *actively wrong*, and you have to catch it.
+
+This is also why a stone alignment on the ridge is a real piece of infrastructure rather than decoration.
+
+### The long night
+
+Nights average 11.7 real hours and run to fifteen or sixteen in midwinter. That is not a problem to be minimised; it is a design brief.
+
+- **Night is when handwork happens.** Knapping, sewing, cordage, fletching, hide scraping, cooking, rendering, tending the fire, teaching, and writing are all *better done by firelight* — some of them exclusively so. This is historically exactly what people did all winter, and it means an eleven-hour night in a warm shelter is the most productive part of the day rather than dead time.
+- **Night is the social season.** In co-op, night is when everyone is at the hearth. That is where teaching happens, where the record gets written, and where whatever your settlement believes gets decided.
+- **Snow has albedo.** A snow-covered landscape under a gibbous moon is genuinely navigable. Moonless nights are the dark ones, which gives night a ~30-day rhythm and makes the lunar cycle worth tracking — another reason to build a calendar.
+- **Without fire and shelter, night is simply survival**, in real time, for eleven hours. Early game this is exactly as brutal as it sounds. It should be.
+
+### Sleep, absence, and the always-on server
+
+**The server clock never skips.** There is no sleep-to-morning button, because with other players awake there is nothing to skip to.
+
+So on a dedicated server, **logging off is how you skip time.** Your character sleeps, or doesn't, in whatever state you left them. This reframes the entire build progression: a shelter is not just warmth, it is **absence insurance**. What happens to your body, your stores, and your animals while you are not there is the real question that base design answers. Come back after four days and the season has moved, the fire is out, something has been at your cache, and the herd has gone somewhere else.
+
+- **Solo** pauses the world on quit by default, with an option for a persistent clock for people who want it.
+- **Dedicated servers** run continuously by default. This is a server setting, because some groups will want the world to pause when everyone is offline, and that should be their call.
+- **Sleep in-world** is still a mechanic — it restores fatigue and burns time you were going to spend anyway — but it is 1:1, so it is something you do because you're tired, not to skip content.
+
+### Starting, joining, and dying
+
+- **A new server picks its founding date.** Start in spring if you want a chance, or in November if you want the other thing.
+- **New arrivals get whatever season it currently is.** No easing, no grace period. Joining an established settlement in deep winter is a hard way to arrive, and how the settlement handles that is [their business](05-society-and-multiplayer.md#2-arrivals).
+- **Death in February means restarting in February.** With permadeath on, this is savage, and it is the intended shape of the game.
+
+### The honest caveat
+
+1:1 asks for a real commitment, and some groups won't have it. The concession lever, if a server needs it, is a **year-rate multiplier that leaves the day at 1:1** — seasons pass 2× or 3× faster while a day is still 23.4 real hours. It costs astronomical coherence (the sun's declination changes faster than the day count justifies, and a carefully built calendar stops agreeing with the sky), and the setting should say so plainly. **The default, and the intended game, is 1:1.**
+
+## 7. Snow and ice
+
+- Snow **accumulates and persists** by depth, with real consequences: movement cost, structural load on roofs, and **tracking** — footprints in snow are an enormous gameplay layer, because you can track animals *and be tracked*, by animals and by people.
+- Lakes freeze progressively: thin ice that breaks, then walkable ice, then thick ice you must chop through to fish. Frozen lakes are new traversal and free refrigeration. **Spring break-up is dangerous and dramatic**, and it ruins every cache you left out on the ice.
 
 ## 7. What we deliberately do not include
 

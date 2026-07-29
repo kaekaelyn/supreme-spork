@@ -1,8 +1,11 @@
 # Yixian Formation paleobiota — game dataset
 #
 # Schema documented in data/README.md. Every entry is validated in CI.
-# This file is the single source of truth for the game's biology: codex entries,
-# spawn tables, ecology parameters, and butchery tables are all generated from it.
+# This file is the single source of truth for the game's biology: spawn tables,
+# ecology parameters, model bindings, and butchery tables are generated from it.
+#
+# NONE of these names, notes, or descriptions are ever shown to the player. The
+# game names nothing and explains nothing. See docs/00-the-transplant.md §3.
 #
 # confidence values: A = preserved in the fossil record
 #                    B = strongly inferred (phylogenetic bracketing / functional morphology)
@@ -33,7 +36,7 @@ theropods:
       description: >
         Ginger/rufous and white banded tail. Countershaded — dark dorsally,
         pale ventrally. Dark "bandit mask" stripe across the eyes.
-      source: vinther_2017_countershading
+      source: smithwick_2017_sinosauropteryx
     habitat_inference:
       confidence: A
       value: open
@@ -172,7 +175,7 @@ theropods:
         Preserved in a curled, tucked sleeping posture with the snout under
         the forelimb — identical to modern birds. Direct fossil evidence of
         sleeping behaviour. Implement this literally.
-    game_role: [ambient, codex_highlight]
+    game_role: [ambient, quiet_discovery]
 
   - genus: Jianianhualong
     species: tengi
@@ -417,7 +420,7 @@ mammals:
     length_m: 0.15
     diet: insectivore
     integument: fur
-    note: Among the earliest known eutherians. Codex highlight.
+    note: Among the earliest known eutherians.
     game_role: [ambient, small_food]
 
   - genus: Sinodelphys
@@ -662,7 +665,7 @@ invertebrates:
     note: >
       Mesozoic gymnosperm pollinator. Pure ambience, and exactly the kind of
       detail that earns credibility with specialists.
-    game_role: [ambient, codex_highlight]
+    game_role: [ambient, quiet_discovery]
 
   - genus: Chresmoda
     species: null

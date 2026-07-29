@@ -5,7 +5,7 @@ Every scientific claim in the design documents traces to an entry here. `source:
 **Verification status** is tracked honestly, because the whole project rests on it:
 
 - ✅ **Verified** — located and its content confirmed during research for these documents.
-- ⚠️ **Needs verification** — drawn from background knowledge and consistent with everything found, but the primary source was not read directly. **Confirm before any of this reaches a player-facing codex entry.**
+- ⚠️ **Needs verification** — drawn from background knowledge and consistent with everything found, but the primary source was not read directly. **Confirm before any of this reaches the published dataset.**
 
 ---
 
@@ -34,7 +34,7 @@ Every scientific claim in the design documents traces to an entry here. `source:
 |---|---|---|
 | `yixian_lithology` | Composite: basalt, andesite, tuff, tuffaceous sandstone, rhyolitic pyroclastics, shale, mudstone, siltstone, conglomerate; 225–4,000 m thick; Jianshangou unit 230–420 m with coal seams | ✅ |
 | `chaoyang_volcanics` | *Essential Characteristics of Volcanic Rocks of Yixian Formation and Discussion on Tectonic Setting in Chaoyang Basin, Western Liaoning.* [Link](https://www.scientific.net/AMM.170-173.1261) | ✅ |
-| — | **Obsidian, chert, chalcedony, and agate availability** is inferred from the formation's rhyolitic volcanism and regional silicification, *not* from a Yixian-specific paper. Flag in codex as plausible-not-attested | ⚠️ |
+| — | **Obsidian, chert, chalcedony, and agate availability** is inferred from the formation's rhyolitic volcanism and regional silicification, *not* from a Yixian-specific paper. Flag as plausible-not-attested | ⚠️ |
 
 ## Coloration
 
@@ -89,4 +89,4 @@ Claims computed or reasoned from first principles rather than taken from a paper
 
 ## Standing note
 
-This list is deliberately short of where it needs to be. Before any codex entry ships, every ⚠️ must become ✅, and the whole file should be reviewed by the paleontological advisor described in [07 — Roadmap §4](docs/07-roadmap.md#4-team-shape). Publishing citations we have not read would be worse than publishing none.
+This list is deliberately short of where it needs to be. Before the dataset is published, every ⚠️ must become ✅, and the whole file should be reviewed by the paleontological advisor described in [07 — Roadmap §5](docs/07-roadmap.md#5-team-shape). Publishing citations we have not read would be worse than publishing none.

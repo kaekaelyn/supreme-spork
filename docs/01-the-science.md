@@ -31,7 +31,7 @@ Two independent lines of evidence, both pointing cold:
 
 Supporting evidence: fossil insect groups present (Raphidioptera, Siberioperlidae stoneflies) are cold-adapted montane taxa implying alpine lakes and streams at 800 m or more. Fossil wood and palynology show conifer-dominated forest, with bisaccate conifer pollen exceeding 70% of the palynomorph assemblage. Lacustrine varves show **strong seasonality** — light carbonate laminae from warm-season photosynthetic precipitation alternating with dark siliciclastic laminae from cold-season terrestrial input. Rainfall alternated between semi-arid and mesic.
 
-> **Design ruling.** We model the world at roughly **7 °C mean annual temperature**, seasonally swinging from about **−20 °C in deep winter to 24 °C in high summer**, at an elevation treated as **~2,000 m** in a basin floor rising to ~3,000 m on the volcanic ridges. This sits inside the plausible envelope of both studies, gives us snow, ice-over on lakes, and a genuine growing season. The uncertainty is disclosed in the codex.
+> **Design ruling.** We model the world at roughly **7 °C mean annual temperature**, seasonally swinging from about **−20 °C in deep winter to 24 °C in high summer**, at an elevation treated as **~2,000 m** in a basin floor rising to ~3,000 m on the volcanic ridges. This sits inside the plausible envelope of both studies, gives us snow, ice-over on lakes, and a genuine growing season. The uncertainty is disclosed in the published dataset and design notes — never in the game.
 
 This is the design decision the entire game hangs on. It is also the single biggest departure from audience expectations, and we should lean into it hard in marketing. **Feathers are insulation. This is why.**
 
@@ -105,7 +105,7 @@ Everything else gets a reconstruction flagged as such.
 
 ## 6. Confidence tiers
 
-Every species, plant, and behaviour in the game carries a tier. The codex displays it. The **Speculation Level** setting determines how much of tiers C and D the world expresses.
+Every species, plant, and behaviour in the game carries a tier. **The player never sees it.** Tiers are an internal discipline for us and a public commitment in the [open dataset](../data/) — they govern what we are allowed to build, not what the game says about itself. The **Speculation Level** setting determines how much of tiers C and D the world expresses, and it is described in settings without any in-fiction framing.
 
 | Tier | Meaning | Example |
 |---|---|---|
@@ -115,7 +115,7 @@ Every species, plant, and behaviour in the game carries a tier. The codex displa
 | **D — Speculative** | Defensible but genuinely contested | Specific pack-hunting coordination; venom in *Zhangheotherium*'s tarsal spur |
 
 **Speculation Level** in settings:
-- **Strict** — tier A and B only. Animals that we have no colour data for appear in muted, evidence-neutral plumage. Behaviour is minimal and naturalistic. This is the museum/classroom mode.
+- **Strict** — tier A and B only. Animals we have no colour data for appear in muted, evidence-neutral plumage. Behaviour is minimal and naturalistic.
 - **Standard** (default) — A through C. A fully fleshed-out living world where every addition is defensible.
 - **Rich** — A through D. More display behaviour, more vivid speculative colour, more complex sociality. Still nothing invented from whole cloth.
 
@@ -139,7 +139,15 @@ The single easiest way for this project to lose credibility is to include a famo
 | ***Protopteryx***, ***Eoconfuciusornis*** | Huajiying Fm | ~131 Ma — too old |
 | ***Archaeamphora*** | Yixian, but not an angiosperm | Refuted 2015 |
 
-> **Scope decision required.** Strict Yixian gives us a defensible, coherent, ~1-Myr window and excludes *Microraptor*, the four-winged icon everyone will ask for. Broadening to "the Jehol Biota" buys us that icon and a much richer bird fauna at the cost of smearing 11 million years together. **My recommendation: stay strict.** Ship *Microraptor* later as an explicitly-labelled "Jiufotang" expansion set in the same basin, several million years on, which is *also* a great sequel hook. Discussed in [08 — Open Questions](08-open-questions.md).
+> **Settled: strict Yixian. One time, one place. No fudging.** *Microraptor* does not appear in this game, in any form, ever — not as a mod-friendly stub, not as a "bonus," not in the launch trailer. Neither does anything else in the table above. There is no Jiufotang expansion planned, because a later formation would be a different world and this game is about *one*.
+
+### Is the whole formation really "one time"?
+
+Worth stress-testing, because the Yixian's nominal 125.8–124.1 Ma span is 1.7 Myr, and blending assemblages across that would itself be a kind of fudging.
+
+The science lets us off. The 2024 PNAS reassessment constrains the fossiliferous sequence to **less than about 93,000 years** — geologically, a single instant — and characterises the formation as "a brief snapshot of normal life and death" rather than a series of catastrophes. On that reading, the Yixian assemblage genuinely *is* one moment, and drawing on all of it is not a compromise.
+
+The remaining question is spatial, not temporal: Lujiatun, Jianshangou, Dawangzhangzi, and Jingangshan are different localities with somewhat different assemblages. **We resolve that spatially rather than by layering** — one basin, with the assemblages distributed across it as habitat variation. That is what the *Sinosauropteryx* (open habitat) and *Psittacosaurus* (closed forest) camouflage results already tell us to do, so the unit differences become the map's biome structure. One place, one time, coherent.
 
 ## 8. The sky
 
@@ -155,6 +163,8 @@ The consequence: **the calendar is a technology**. Winter kills, so predicting w
 
 ## 9. Standing rule: the paleontology is data
 
-Every species lives in [`data/species.yaml`](../data/species.yaml) with its unit, size, integument, confidence tiers, and citations — **not** hardcoded in engine. When new work is published, we patch the dataset, bump its version, and the in-game codex shows a changelog entry: *"Updated with Zhang et al. 2027 — plumage revised."*
+Every species lives in [`data/species.yaml`](../data/species.yaml) with its unit, size, integument, confidence tiers, and citations — **not** hardcoded in engine. When new work is published, we patch the dataset, bump its version, and the animal changes.
+
+The changelog is **public and out-of-game** — in the open dataset's repository, where scientists can read and correct it — because nothing inside the fiction ever explains itself. A player who has been watching the same animal for two years may simply notice, after an update, that its plumage is different now. They will not be told why. If they care, the answer is a published citation, one click outside the game.
 
 Nobody has shipped a game that gets more scientifically accurate after release. We should.

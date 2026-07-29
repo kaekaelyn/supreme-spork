@@ -59,8 +59,17 @@ This is the architecture the game lives or dies on.
 - **Server binary ships alongside the game**, headless, Linux and Windows, so LAN and self-hosting are trivial. Also supports listen-server ("host and play") for the friend-group case where nobody wants to run infrastructure.
 - **Replication budget.** With ≤16 players, per-animal replication is affordable. Prioritise by relevance: animals near a player at full rate, distant ones at reduced rate or not at all.
 - **Client-side prediction** for player movement only. Animals are server-authoritative with interpolation — a slight lag on an animal is far better than a rubber-banding predator.
-- **World persistence.** Full world state (terrain deformation, structures, ecology cells, the Record, glyphs) serialises to a single portable directory. **This must be a clean, documented, copyable format** because the Legacy feature in [05](05-society-and-multiplayer.md) depends on world files being shareable.
-- **Offline progression** is a server setting: ecology continues (default), ecology pauses, or ecology runs at reduced rate.
+- **World persistence.** Full world state (terrain deformation, structures, ecology cells, journals, inscriptions, glyph definitions, graves) serialises to a single portable directory. **This must be a clean, documented, copyable format** because the Legacy seed in [05](05-society-and-multiplayer.md#the-legacy-seed) depends on world files being shareable — including the player-authored text and imagery in them.
+
+### The clock is infrastructure, not a feature
+
+The [1:1 always-on world clock](02-survival-systems.md#6-time--the-11-world-clock) has architectural consequences that have to be designed for from the start, not retrofitted:
+
+- **The server runs 24/7 and simulates continuously.** The ecology core must be cheap enough to run indefinitely with zero players connected — which the coarse tier already is, and which is another argument for keeping it engine-independent and headless. A world nobody is logged into should cost almost nothing.
+- **Self-hosting must be genuinely easy**, because at 1:1 a world is a multi-year commitment and people will run these on a home box or a cheap VPS for a very long time. Small footprint, clean upgrades, no data loss across patches. **Save-format stability is a first-class requirement**, not a nice-to-have — breaking a two-year-old world is unforgivable in a game built on permanence.
+- **Backups and migration are player-facing features.** Ship them.
+- **The clock is authoritative and monotonic.** No skipping, no voting, no acceleration. Solo pauses on quit (default); dedicated servers do not.
+- **Long-absence reconciliation.** A player returning after weeks needs the world to have moved coherently — seasons, ecology, structural decay, food spoilage, fire out, animals dispersed. All of it falls out of the coarse tier running continuously, which is the payoff for building it properly.
 
 ## 4. World generation
 
@@ -98,16 +107,16 @@ The technical signature of the game and worth real R&D time.
 The versioned-paleontology principle from [01 §9](01-the-science.md#9-standing-rule-the-paleontology-is-data) needs real infrastructure:
 
 - All species, plants, and their properties live in [`data/`](../data/) as YAML, validated against a schema in CI.
-- The build pipeline generates codex entries, spawn tables, ecology parameters, and loot/butchery tables **from that data**.
-- Each entry carries `confidence`, `sources`, and `revision`. A science patch is a data PR, and the codex changelog is generated from git history.
+- The build pipeline generates spawn tables, ecology parameters, model/material bindings, and butchery tables **from that data**. It generates nothing player-facing in text form, because [nothing in the game is named or described](00-the-transplant.md#3-what-the-player-is-never-told).
+- Each entry carries `confidence`, `sources`, and `revision`. A science patch is a data PR, and the changelog is generated from git history — published **outside** the game, in the open dataset repository.
 - **The dataset should be public and open-licensed**, separately from the game. Paleontologists will correct it for free, which is worth more than a consultant, and it turns our biggest credibility risk into a community asset.
 
 ## 8. Modding
 
 Given the audience, mod support is close to mandatory and cheap if planned:
-- Species data is already external data — modders can add taxa trivially.
-- The **Jiufotang expansion** ([01 §7](01-the-science.md#7-the-exclusion-list)) should be built as a data pack, proving the pipeline works.
-- Expect and support "less strict" mods. Somebody will add *Microraptor* on day one. That's fine; the *default* is what defines us.
+- Species data is already external data, so modders can add taxa trivially.
+- Somebody will add *Microraptor* within a week of launch. Let them, and never ship it ourselves, in any form — not as a stub, not as an "official" pack, not in a trailer. [One time, one place](01-the-science.md#7-the-exclusion-list). What we ship is what defines us; what the workshop does is the workshop's business.
+- The likelier and more valuable mods are **tooling**: journal export, map rendering, glyph fonts, and server-management utilities. Design the save format so those are possible without reverse-engineering.
 
 ## 9. Testing strategy
 

@@ -19,7 +19,7 @@ Basalt, andesite, tuff, rhyolitic pyroclastics, and their weathering products ar
 |---|---|---|
 | **Basalt / andesite** | Hammerstones, grinding slabs, hearth stones, construction | Abundant, tough, poor for flaking |
 | **Tuff** | Carvable soft rock — **you can excavate dwellings into tuff cliffs** | Historically real (Cappadocia). A phenomenal, setting-specific building path |
-| **Obsidian / volcanic glass** | The best cutting edge available | Requires rhyolitic volcanism, which the formation has. Rare, localised, worth travelling for. **Flag as plausible-not-attested in codex** |
+| **Obsidian / volcanic glass** | The best cutting edge available | Requires rhyolitic volcanism, which the formation has. Rare, localised, worth travelling for. **Plausible-not-attested; flag in the public dataset** |
 | **Chert / chalcedony / agate** | The workhorse flaking stone | Silicification of volcanics; regionally well known. Flag confidence |
 | **Pumice** | Abrasive, float, insulation | Free from ashfall |
 | **Ochre (iron oxides)** | Pigment, hide preservative | Volcanic weathering; essential for the glyph/record system |
@@ -46,7 +46,7 @@ Knapping. Hand axe, flake knife, scraper. Bark bast cordage — weak but suffici
 Friction fire. Controlled hearth. Smoking and drying racks. Rendering fat. **Bone marrow extraction** — solves protein poisoning. Cooking transforms toxin loads and calorie availability. Pitch glue from resin + charcoal + fat. Hafted tools.
 
 ### Tier 3 — Hide and textile
-Brain tanning (real, and the brain of an animal is famously almost exactly enough to tan its own hide — a great piece of trivia to leave in the codex). Sewing with **quill and bone needles** and sinew thread. **Down-stuffed garments and bedding — the single most valuable technology in the game.** Fish-skin waterproofing. Layered clothing with per-zone coverage.
+Brain tanning — and the brain of an animal is famously almost exactly enough to tan its own hide, which is the kind of thing a player discovers and writes down in disbelief. Sewing with **quill and bone needles** and sinew thread. **Down-stuffed garments and bedding — the single most valuable technology in the game.** Fish-skin waterproofing. Layered clothing with per-zone coverage.
 
 At this point the player can survive a winter. This is the end of Act 1 and should take a serious player most of a first in-game year.
 
@@ -70,29 +70,41 @@ Throwing spear → **atlatl** (the real revolution; a spear-thrower more than do
 ### Tier 7 — Husbandry and land management
 See [04 §6](04-bestiary-and-ecology.md#6-domestication). Plus **land management as the substitute for agriculture**: coppicing conifers for straight poles, clearing to encourage fern glades, transplanting horsetail beds to convenient sites, protecting productive ginkgo groves, and fire-managing scrub. You do not farm. You *garden the forest*, which is what pre-agricultural peoples actually did and which nearly no game models.
 
-### Tier 8 — Optional long tail
-Bog iron / limonite from lake margins is geologically plausible; copper via malachite in hydrothermally altered volcanics is a stretch but arguable.
+### Tier 8 — The last things a person can actually build
 
-> **My recommendation: cap the tree below metal, at least at launch.** The endgame of this game should be a thriving multi-generational settlement that has learned to read its valley — not an anvil. Metal is the reflex answer and it's the least interesting direction available. Offer it as a server-configurable, clearly-labelled optional module for groups that want it, and make the *default* endgame social and ecological mastery. See [08](08-open-questions.md).
+Not "late game unlocks." These are simply the outermost things reachable by [a modern mind with no infrastructure](00-the-transplant.md#2-the-tech-ceiling):
+
+**Lime** — burnt from shell and lacustrine carbonate in a kiln you already built for pottery, giving plaster, mortar, and durable construction. **Soap** — rendered fat and wood-ash lye, which a modern person knows and a Neolithic one did not, and which feeds directly into the parasite and infection systems. **Charcoal** in quantity, for hotter fires and better ceramics. **The bow**, once stave wood, cordage, glue, and fletching all exist at once. **Cordage mechanics** — windlass, block, ramp, lever — enough to move timber and stone no group could otherwise lift. **Structured selective breeding** across generations.
+
+And that is the ceiling.
+
+> **There is no metal in this game.** No ore prospecting, no smelting, no forge, no server toggle. A modern person knows smelting exists; finding workable ore alone in this terrain and running a furnace economy is not something one person or one small settlement achieves, and pretending otherwise would be exactly the wheel this game refuses to reinvent. Also absent for the same reason: the wheel as transport, glass, and plant-fibre textiles — there is no flax, no hemp, no cotton, nothing to spin.
+>
+> The endgame is not a better tool. It is a settlement that has survived enough winters to have a memory, and has written down enough that its knowledge outlives anyone in it.
 
 ## 4. Knowledge as a physical object
 
-The replacement for a tech tree UI:
+The replacement for a tech tree UI, and the thing that makes [permadeath](05-society-and-multiplayer.md#4-permadeath-and-what-survives-you) mean something.
 
-- **You know what you have done.** Skills are per-character and practice-based.
-- **Knowledge can be recorded** — ochre pigment on a rock face, notches on a tally stick, a carved bone plaque, arrangements of objects. These are *world objects*. They can be found by strangers, and they can burn.
-- **Knowledge can be taught** — demonstrating a technique near another player transfers it (see [05](05-society-and-multiplayer.md)).
-- **Knowledge dies.** If the only person who knew how to fire pottery dies and never recorded or taught it, that knowledge is gone from the world until someone rediscovers it.
+- **You know what you have done.** Skills are per-character and practice-based. They are not written down anywhere in the interface.
+- **Knowledge can be recorded**, and you are literate, so you can record it *properly* — real sentences, real diagrams, real measurements, on rock faces, bark, hide, and later plaster. These are world objects. They can be found by strangers. They can burn.
+- **A written record transmits the concept, not the skill.** This is the crucial rule. Reading your predecessor's notes on firing pottery tells you the clay mix, the drying time, and the three ways it goes wrong — an enormous learning-rate bonus and the difference between years of rediscovery and one careful season. It does not give you their hands. You still have to fire a hundred pots.
+- **Knowledge can be taught** — demonstrating a technique in proximity to another player transfers it far faster than either practice or reading.
+- **Knowledge dies.** If the only person who knew how to fire pottery dies without recording or teaching it, it is gone from the world until someone rediscovers it from nothing.
 
-In solo play this becomes quietly devastating: you are recording things for a successor who may never come. In multiplayer it makes elders genuinely valuable, and it makes a burned record hall a catastrophe with no combat attached to it.
+In solo play this is quietly devastating: you are writing for a successor who may never come, and who — if permadeath is on — will be you, with no idea what you knew. In multiplayer it makes elders genuinely valuable and makes a burned record a catastrophe with no combat attached to it.
 
-## 5. The Codex
+## 5. The Journal
 
-The in-game reference, and the game's actual soul.
+**There is no codex.** The game ships no reference, no bestiary, no field guide, and no names for anything. What it ships instead is a blank book and the means to fill it.
 
-- Fills in **as you observe**, not as you unlock. Watch a *Sinocalliopteryx* eat and the entry updates.
-- Every entry shows its **confidence tier** and, for the curious, its **real citation**.
-- Entries note **what we don't know** explicitly: *"Vocalisation unknown. No fossil evidence exists for the sounds this animal made. What you hear is our reconstruction."*
-- Ships with a **changelog** so science patches are visible.
+The Journal is a craftable, physical, losable object. In it you can:
 
-The codex is how this game earns a museum partnership, a classroom edition, and the goodwill of every paleontologist on the internet — which is, commercially, worth more than any amount of marketing spend.
+- **Write freely** — your own words, your own language, in your own hand.
+- **Sketch** — a simple drawing tool. Draw the animal. Draw the trap that worked. Draw the ridge line and where the sun rose against it.
+- **Name things.** Every animal, plant, place, star, and season gets whatever name you give it, and that name is what appears on your own maps and marks. In multiplayer, whether the settlement adopts your name for the big striped one is a social question, not a mechanical one.
+- **Tabulate.** Tally marks, day counts, measurements. This is how you catch the 374-day year.
+
+A settlement's accumulated journals are its science — and its scripture, if that is the direction it goes. Copying a journal is slow, deliberate work and the only insurance against losing it. Somebody will eventually build a dry, stone-walled, fire-separated room to keep them in, and that will be a library, and nobody will have told them to.
+
+The scientific rigour of this game lives entirely in [the world itself](01-the-science.md) and in the [public dataset](../data/). It never speaks to the player. What the player gets is a pen.

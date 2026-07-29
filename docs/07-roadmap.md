@@ -1,6 +1,6 @@
 # 07 — Roadmap, Scope & Risk
 
-Honest assessment: this is an ambitious project, and the ambition is concentrated in **simulation**, not content. That's a good place for it to be, because simulation scales without an art team.
+The ambition here is concentrated in **simulation and time**, not content volume. That's a good place for it, because simulation scales without an art team — but the 1:1 clock creates development problems that need solving early rather than discovered late.
 
 ---
 
@@ -8,75 +8,84 @@ Honest assessment: this is an ambitious project, and the ambition is concentrate
 
 **Target: 6–10 weeks. One programmer, one artist, placeholder everything.**
 
-Not a vertical slice. A **thesis test**. One question: *is being cold and naked in a conifer forest, with no instructions, compelling for 45 minutes?*
+Not a vertical slice. A **thesis test**, asking one question: *is being cold, naked, and unexplained in a conifer forest compelling for two hours?*
 
 Scope:
 - One 500 m × 500 m patch of conifer forest, greybox terrain
 - The thermal model, complete and tuned
-- Fire: fetch an ember from a vent, feed it, shelter it
+- Fire: carry an ember from a vent, feed it, shelter it, lose it
 - Debris shelter construction
-- Three species: *Lycoptera* (fish, catchable by hand), *Jeholosaurus* (naive, approachable, edible), *Confuciusornis* (ambient, beautiful)
-- Day/night at 23.4 h, one weather system, rain
+- Three animals: one small fish (catchable by hand), one small unafraid herbivore, one flock bird — **none of them named, described, or labelled**
+- A real 23.4-hour day, running 1:1, with one full night
 - **No UI whatsoever**
 
-If the first 45 minutes aren't gripping with zero content, more content won't fix it. If they are, everything else is execution.
+The night is the test. If two hours of real darkness with a fire is compelling rather than tedious, the whole time model works. If it isn't, we learn that for ten weeks of cost instead of two years.
 
-## 2. Vertical slice
+## 2. The time problem in development
 
-**Target: 8–12 months from a green light on the prototype.**
+At 1:1, **nobody on the team can playtest a year.** This needs infrastructure from day one, not month eighteen:
 
-- **One valley**, hand-authored, ~4 km², with all six biomes represented
-- **A full year cycle** including a survivable-but-brutal winter
+- **A time-scale debug lever** (up to several thousand ×) available in dev builds and never in shipping ones. Everything must be correct at any rate — which is a genuine constraint on how systems are written, and much cheaper to enforce from the start than to retrofit.
+- **Snapshot worlds.** Curated save states at "day 40 of the first winter," "year 2 spring," "year 5 established settlement," so anyone can load into any point in the arc immediately. These become the primary QA and design artefacts.
+- **Headless ecology soak runs** simulating decades in seconds (see §6).
+- **A long-running internal server at true 1:1**, started as early as possible and never reset, so at least one instance of the game is being experienced the way players will experience it. Start this during the prototype. By ship it will be several years old and it will teach us things nothing else can.
+
+## 3. Vertical slice
+
+**Target: 8–12 months after a green light on the prototype.**
+
+- **One basin**, hand-authored, ~4 km², with the six biomes and the stratigraphic assemblages distributed spatially
+- **A full year**, playable via snapshot states, with a survivable-but-brutal winter
 - **Tech tiers 0–4**, ending at fired ceramics
-- **12–15 species**, materialised and simulated, with the two-tier ecology core running and CI-tested
-- **4-player co-op** over the Internet and LAN, dedicated server binary
-- **The Codex**, with real citations, and the Speculation Level setting working
-- **Glyph writing** and the teaching mechanic
-- Naive-fauna fear propagation, demonstrably observable across the year
+- **12–15 species**, materialised and simulated, two-tier ecology core running and CI-tested
+- **4-player co-op** over the Internet and LAN, dedicated always-on server binary
+- **The Journal** — free writing, sketching, tallying — and the glyph system
+- **Permadeath, arrivals, and the teaching mechanic**
+- Naive-fauna fear propagation, demonstrably observable across a simulated year
 
-This is a publishable Early Access build.
-
-## 3. Toward 1.0
+## 4. Toward 1.0
 
 | Phase | Adds |
 |---|---|
-| **EA launch** | The vertical slice, hardened, plus 2–3 more valleys |
-| **EA year 1** | Tech tiers 5–7, domestication, the Record, full roster (~35 species), Legacy world sharing |
-| **EA year 2** | Multi-year events (volcanic winter), land management, 16-player servers, modding SDK, music/ornament depth |
-| **1.0** | Polish, the full ~50-species roster, education/museum edition |
-| **Post-1.0** | The **Jiufotang** data pack — the same basin ~5 million years later, with *Microraptor*, *Jeholornis*, and *Sapeornis*. A sequel's worth of content shipped as data |
+| **Early Access** | The slice, hardened, plus 2–3 more basins |
+| **EA year 1** | Tech tiers 5–8 to the ceiling, domestication, full roster (~35 species), Legacy world seeding, save-format stability guarantees |
+| **EA year 2** | Multi-year events (volcanic winter), land management, 16-player servers, modding and server tooling, ornament and music depth |
+| **1.0** | Polish, full ~50-species roster, the public dataset published and maintained |
+| **Post-1.0** | **More of the same world, deeper** — additional basins in the same formation, more of the attested biota, better simulation. **No expansion to another formation or another time.** There is no *Microraptor* DLC. The game is one place |
 
-## 4. Team shape
+## 5. Team shape
 
-Minimum viable for the vertical slice, roughly:
+Minimum viable for the vertical slice:
 
 - **2 gameplay/simulation programmers** (one owning the ecology core exclusively)
-- **1 engine/graphics programmer** (feathers, vegetation, snow, weather)
-- **1 network programmer** (part-time until the slice)
-- **1 environment artist** and **1 creature artist/animator** — the creature artist is the highest-value hire in the project
-- **1 designer** (systems, tuning, and owner of the "no UI" discipline)
-- **A paleontological advisor on retainer.** Not a courtesy credit — a working relationship with someone who reviews every species entry. Budget for this from day one; it is the cheapest credibility we will ever buy, and it is the entire premise of the game
+- **1 engine/graphics programmer** — feathers, vegetation, snow, weather, and the night-lighting problem, which is a bigger deal here than in most games
+- **1 network/backend programmer** — the always-on server, persistence, and save-format stability are load-bearing, not plumbing
+- **1 environment artist**, **1 creature artist/animator** — the creature artist is the highest-value hire in the project
+- **1 designer** owning systems, tuning, and the "nothing is ever explained" discipline, which will be under constant pressure to erode
+- **A paleontological advisor on retainer** — a working relationship, not a credit. Reviews every species entry. Budget from day one; it is the cheapest credibility available and it is the entire premise
 - **A paleoartist consultant** for reconstruction review
 
-## 5. Risks, ranked
+## 6. Risks, ranked
 
-**1. The ecosystem sim is a research problem, not an engineering task.** Predator-prey systems oscillate, collapse, and explode. Mitigation: build the core headless and engine-independent from day one (§[06.2](06-technical-architecture.md#2-the-two-tier-simulation--the-core-technical-bet)), soak-test in CI, and accept damping terms that aren't strictly ecologically pure. Ship a stable sim over a correct one.
+**1. The ecosystem sim is a research problem, not an engineering task.** Predator-prey systems oscillate, collapse, and explode — and at 1:1 with always-on servers, a slow instability that takes two in-game years to manifest is a *catastrophic* bug that appears in players' worlds long after ship. Mitigation: build the core headless and engine-independent from day one, soak-test hundreds of in-game years in CI on every PR, and accept damping terms that aren't strictly ecologically pure. **Ship a stable sim over a correct one.**
 
-**2. "No UI, no tutorial" is a wall for most players.** Mitigation: diegetic feedback has to be *outstanding* — the body must communicate clearly enough that no text is needed. Playtest with non-genre players early and often. The optional accessibility overlay is not a failure.
+**2. Save-format instability destroys multi-year worlds.** In a 1:1 game, a world is a years-long investment, and losing one to a patch is unforgivable in a way it simply isn't elsewhere. Mitigation: versioned saves, forward migration tested against real old worlds, and an explicit public commitment. Treat a broken save as a sev-1.
 
-**3. Naturalistic animal density feels empty.** See [04 §7](04-bestiary-and-ecology.md#7-animal-density-and-pacing). Mitigation: density settings, deep tracking gameplay, and a dense small-fauna layer so the world is quiet rather than dead.
+**3. The 1:1 clock loses players who wanted a survival game.** Mitigation: don't fight it. This is [not a general-release game](../README.md#audience) and the store page should say so in the first paragraph. Market the commitment as the feature, be honest that a year takes a year, and let the right people self-select. The wrong buyer is a refund and a bad review; the right buyer plays for three years.
 
-**4. Audience expectation mismatch.** People will buy this expecting Ark with feathers, then discover a cold subalpine hiking simulator where a flea is more dangerous than a tyrannosaur. Mitigation: *market the cold*. Lead every trailer with snow and breath-fog. Make the first screenshot a naked human shivering in a snowy conifer forest under an unrecognisable sky. Set expectations honestly and the right players will find it.
+**4. "Nothing is explained" reads as unfinished rather than deliberate.** Mitigation: the *body* has to communicate flawlessly — shivering, breath, clumsiness, exhaustion must be legible enough that no text is needed. Playtest specifically for "I didn't know what to do" versus "I knew what to do and couldn't." The first is a bug we must fix; the second is the game.
 
-**5. Scientific criticism.** Unavoidable, and the specialists are the loudest voices in this space. Mitigation: the confidence-tier system, public citations, an open dataset, a real advisor, and a visible willingness to patch. **Being publicly correctable is a stronger position than being right.**
+**5. Naturalistic animal density feels empty.** See [04 §7](04-bestiary-and-ecology.md#7-animal-density-and-pacing). Mitigation: density settings, deep tracking gameplay, and a dense small-fauna layer so the world is quiet rather than dead.
 
-**6. Scope creep via the culture systems.** Glyphs, the Record, teaching, music, and ornament are all seductive and none of them keep a player alive. Mitigation: survival and ecology ship first. Culture systems are the vertical slice's *last* milestone, not its first.
+**6. Scientific criticism.** Unavoidable; the specialists are the loudest voices in this space. Mitigation: confidence tiers, public citations, an open dataset, a real advisor, and visible willingness to patch. **Being publicly correctable is a stronger position than being right.**
 
-**7. The engine choice being wrong.** Mitigation: the engine-independent ecology core means a port costs us rendering and animation work, not simulation work. That's the insurance policy.
+**7. Scope creep via the culture systems.** Journals, glyphs, music, ornament, and burial are all seductive and none of them keep a player alive. Mitigation: survival and ecology ship first; culture systems are the slice's *last* milestone.
 
-## 6. Commercial notes
+**8. The engine choice being wrong.** Mitigation: the engine-independent ecology core means a port costs rendering and animation work, not simulation work.
 
-- **Early Access is the right model.** Survival games are validated by long-tail community play, and the ecology sim genuinely benefits from thousands of hours of unexpected player behaviour.
-- **The education market is real and underserved.** A "Museum Edition" — Strict speculation, codex-forward, no death, free-roam — is a small amount of extra work for access to schools, museums, and institutional licensing. It also generates enormous goodwill.
-- **The open dataset is marketing.** A public, citable, versioned Yixian paleobiota dataset that scientists actually use is a permanent credibility asset that no competitor can copy without doing the same work.
-- **Differentiation is total.** There is no cold, scientifically-strict, feathered, pre-angiosperm survival game. The nearest neighbours (Ark, The Isle, Path of Titans, Saurian) are all doing something else — and *Saurian*, the closest in spirit, is Hell Creek and plays as a dinosaur rather than a human. The niche is genuinely empty.
+## 7. Commercial notes
+
+- **Early Access is right**, and the always-on 1:1 servers make the EA community genuinely load-bearing — they'll accumulate multi-year worlds that no internal testing can replicate.
+- **Deliberately niche.** This is a game for people who want permanence, punishment, and no hand-holding. That audience is small, loyal, vocal, and underserved, and it sustains games like this for a decade. Price and scope accordingly; don't chase a mass audience the design actively repels.
+- **The open dataset is the marketing.** A public, citable, versioned Yixian paleobiota dataset that scientists actually use is a permanent credibility asset no competitor can copy without doing the same work. It is also the entire educational contribution, now that [nothing is explained in-game](00-the-transplant.md#3-what-the-player-is-never-told) — and it's a *better* home for it, because a paleontologist can file an issue against a dataset and can't file one against a codex entry.
+- **Differentiation is total.** There is no cold, strict, feathered, pre-angiosperm, real-time, permadeath survival game. Ark, The Isle, and Path of Titans are doing something else entirely; *Saurian* is Hell Creek and you play as a dinosaur. The nearest spiritual relative is Haven & Hearth, which is not a dinosaur game at all. The niche is empty.

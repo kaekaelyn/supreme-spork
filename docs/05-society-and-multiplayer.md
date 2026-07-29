@@ -1,8 +1,8 @@
 # 05 — Society & Multiplayer
 
-The brief: *no traditional story, but plenty of room for roleplaying and building a new little human tribe or society, built and customised from the ground up.*
+The brief: no story, but room for building a tribe and deciding from the ground up what it believes.
 
-The design answer: **provide no culture, and provide excellent tools for making one.** Every system here is a blank instrument. The game ships zero lore, zero names, zero rituals, zero factions. It ships the *materials* from which players make those things, and it makes them mechanically load-bearing so they aren't merely decorative roleplay.
+The design answer: **ship no culture, and ship excellent instruments for making one.** Zero lore, zero names, zero rituals, zero factions, zero prescribed structure. What ships is the *material* — a pen, a hearth, a set of marks, and a set of pressures that make people need each other — and every system is mechanically load-bearing so that culture isn't decorative roleplay bolted onto a survival game.
 
 ---
 
@@ -10,72 +10,92 @@ The design answer: **provide no culture, and provide excellent tools for making 
 
 | Mode | Design intent |
 |---|---|
-| **Solo** | You are alone. Genuinely, permanently alone. No NPC humans — introducing them would demand an explanation the premise refuses to give. The society layer becomes about **the record you leave for a successor who may never come.** This is melancholy and it is the best version of solo survival I can imagine for this setting |
-| **Co-op (Internet)** | 2–8 typical, up to ~16. Dedicated server binary, or host-and-play. This is the game's heart |
-| **LAN** | Same server binary, discoverable on the local network, fully offline-capable. First-class, not an afterthought |
+| **Solo** | You are alone. No NPC humans, ever — introducing them would demand an explanation the premise refuses. The society layer becomes the record you leave for a successor who, under permadeath, is a stranger who is also you. World pauses on quit by default |
+| **Co-op (Internet)** | 2–8 typical, up to ~16. Dedicated server, always-on 1:1 clock. This is the game's heart |
+| **LAN** | Same server binary, discoverable locally, fully offline. First-class, not an afterthought |
 
-### The Legacy feature (solo's secret weapon)
+### The Legacy seed
 
-A solo world can be **seeded from another player's abandoned world file**. You arrive at somebody else's ruins: their collapsed longhouse, their middens, their glyphs on the rock face, their tally sticks, their graves, their half-finished stone alignment on the ridge. You cannot talk to them. You can only read what they left and try to work out what happened.
+A solo world can be **seeded from another player's abandoned world file**. You arrive at somebody else's ruins: their collapsed longhouse, their middens, their marks on the rock, their journals, their graves, their half-finished alignment on the ridge — written in a language and a symbol set you may or may not share.
 
-This is asynchronous multiplayer, it costs almost nothing to build on top of world serialisation we need anyway, and it is the most evocative feature in this entire document. It also creates a self-sustaining community economy of shared world files.
+You cannot ask them anything. You can only read what they left and work out what happened. It costs almost nothing on top of the world serialisation we need anyway, and it is the most evocative thing in this document.
 
-## 2. Writing: the glyph system
+## 2. Arrivals
 
-**Players invent their own writing.** This is the cornerstone of emergent culture.
+**The world produces people. It never says why.**
 
-- A **stamp/stroke set** of primitive marks — lines, arcs, dots, chevrons, hand stencils, hatching — that players combine into glyphs on a small grid.
-- Glyphs are applied with **ochre**, **charcoal**, **incision**, or **relief carving** onto rock faces, posts, bark, hide, bone, and pottery.
-- A glyph carries **no inherent meaning**. Meaning is a social convention the players establish and must teach each other.
-- Glyphs can be **bound to functions** by the community: a trail marker that appears on your map only if you have been taught what it means; a territory post; a warning; a name.
-- **Personal marks.** Every player designs a signature glyph. It appears on things they make. A well-made tool carries its maker's mark forever, and after that player is gone, a stranger finds a beautiful spear point with a mark they don't recognise.
+You woke naked and disoriented with no explanation, and that is the only mechanism there is. A new player joining a server, or a player returning after death, **wakes somewhere in the world, naked, alone, exactly as the first person did.** Not near a hearth, not near their old settlement, not near anyone — somewhere, at whatever hour and season it currently is.
 
-Nothing in this system is authored by us. A server's writing system is entirely its own, is unintelligible to outsiders, and can be **lost**.
+This single mechanic answers reproduction, settlement growth, and respawn at once, and it costs nothing to justify because nothing is ever justified. No breeding, no children, no NPCs, no explanation.
 
-## 3. Teaching, skill, and death
+What it *generates* is the best social content in the game. A settlement that has been standing a while will eventually find a naked, confused, unarmed stranger at its edge in the snow. Someone has to decide what happens. Take them in and feed them through a winter you barely have food for? Test them somehow? Turn them away and listen to it from the treeline? The game has no opinion and no mechanic for any of it.
 
-- **Skills are practice-based and per-character.** You get better at knapping by knapping.
-- **Teaching is a mechanic.** Perform a technique in proximity to another player who is watching, and they gain a large learning bonus toward it. Explicitly demonstrating is far faster than independent discovery.
-- **Death is not a respawn.** Your character is gone. You return as a **new person** — no explanation, same as the first one — with none of your predecessor's practised skills.
-- **What survives you** is what you recorded (glyphs, marked tools, the physical record) and what you taught (skills now living in other players' characters). 
+Whatever the settlement does the *second* time will be shaped by how the first time went. That is a tradition — invented at the table, about the only unexplained thing in the world, with real costs attached. This is exactly the "building culture from the ground up" the premise asks for, and it emerges from a respawn rule.
 
-This makes elders valuable, teaching load-bearing, and knowledge a genuine communal asset. It converts "the veteran player" from a mechanical advantage into a **social role**. And it means a server's culture is a real, fragile, accumulated thing that can actually be destroyed — by a bad winter, a fire, or a well-executed betrayal.
+## 3. Writing — two layers
 
-Solo players get the same rules, which is where it gets quietly brutal: everything you know dies with you unless you wrote it on a rock.
+You are a 21st-century person. **You can write**, and that is one of the very few things a transplant could definitely do from day one. But writing is slow, materials are scarce, and — critically — [a written record transmits the concept, not the skill](03-technology-and-crafting.md#4-knowledge-as-a-physical-object).
 
-## 4. The Record
+**Layer one: real writing.** Free text and sketches in your own language, on rock faces (ochre, slow, permanent), bark and hide (portable, perishable), and eventually lime plaster. Sentences, diagrams, tallies, measurements, maps. This is [the Journal](03-technology-and-crafting.md#5-the-journal): your self-made field guide, your lab notebook, your history, and your only defence against permadeath erasing everything you learned.
 
-An automatically-maintained world chronicle, presented **diegetically as strata**.
+**Layer two: glyphs.** A stamp/stroke set of primitive marks — lines, arcs, dots, chevrons, hatching, hand stencils — combined on a small grid into symbols. Fast to make, readable at a glance and at distance, and carrying **no inherent meaning**. Meaning is a convention the settlement establishes and has to teach.
 
-Significant events — first fire, first pot fired, first winter survived, first death, first *Yutyrannus* sighting, the year of the ashfall, the founding of a hearth — are logged with their date in world-years and the people involved. It is viewable in-game as a layered cross-section, like a geological column of your own settlement's history.
+Glyphs do what prose can't: trail marks, territory posts, warnings, ownership, boundaries, and — inevitably — the settlement's symbolic and ritual vocabulary. Nothing in the system is authored by us. A server's symbol set is entirely its own, unintelligible to outsiders, and can be lost.
 
-It is also the game's **anti-griefing infrastructure**, because it makes actions attributable without any reputation UI. And it is a phenomenal share/export artefact: an auto-generated illustrated history of your server, suitable for posting.
+**Personal marks.** Every player designs a signature glyph. It appears on things they make. A well-made spear point carries its maker's mark forever, and long after that person is gone a stranger finds it and doesn't recognise the mark.
 
-## 5. Territory, property, and conflict
+## 4. Permadeath and what survives you
+
+**Default on**, server-configurable off.
+
+Your character dies and is gone. You return as [a new arrival](#2-arrivals) — naked, elsewhere, with none of your predecessor's practised skill. You, the person at the keyboard, remember where the settlement was. Your hands do not remember how to knap.
+
+What survives you is exactly two things:
+
+1. **What you wrote.** Journals, rock inscriptions, marked tools, maps, tallies. Concepts, not competence — but concepts are the difference between a season of relearning and a decade.
+2. **What you taught.** Skills you demonstrated to other players now live in their characters.
+
+This is why teaching is a mechanic rather than a courtesy, why elders are valuable, and why a burned record room is a catastrophe with no combat in it. It is also why the one thing a modern transplant can definitely do — write things down for whoever comes next — is the thing the whole social design rests on.
+
+The soft option, for servers that want it, is **inheritance**: a new character retains a fraction of the previous one's practised skill. It changes the game's temperature considerably and it should be off by default.
+
+## 5. PvP and friendly fire
+
+**PvP is on.** With permadeath on, killing another player is permanent, and in a settlement of six people that is the heaviest thing in the game. It should be possible, and it should never be casual.
+
+The rule that makes that work: **intent must match consequence.**
+
+- **Melee does not target people by accident.** Swinging an axe at a tree beside a friend cannot kill them. Harming a person in melee requires a deliberate, distinct commitment — a separate input, unmistakable to the person doing it. You will never kill your friend because you turned the wrong way.
+- **Projectiles hit whatever is in the line of fire.** Thrown spears, atlatl darts, and arrows do not check who they hit. Loosing an arrow at an animal past someone's shoulder is a real risk, and it should be, because that is what makes group hunting tense and teaches people to call their shots.
+- **The environment does not care.** Falling trees, deadfalls, pit traps, fire, rockfall, thin ice, and H₂S hollows kill anyone. A trap you set for something else will kill your friend, and that is correct — it teaches care about where you put things, and it produces genuine tragedies rather than griefing.
+- **No friendly-fire flinch, stagger, or damage chip in melee.** Either you committed or nothing happened. Ambiguity is the enemy.
+
+Server settings can disable PvP entirely. They cannot make projectiles or the environment selective — that would break the physical honesty the rest of the game runs on.
+
+## 6. Territory and property
 
 **No claim flags. No clan menus. No ownership toggles.**
 
-- **A hearth defines a home.** A lit, maintained hearth marks a place as occupied. Hearths are visible at distance by smoke — which means your settlement's presence is *inherently* broadcast, and hiding requires giving up fire.
-- **Property is possession plus social convention.** The game does not stop you taking things. The Record notes that you did.
-- **PvP is server-configurable**, defaulting to **off** for public servers and **on** for private ones. Given the premise, I'd resist making PvP the centre of gravity — the environment is a better antagonist than other players, and the co-operative pressure of a shared winter is where the good stories are.
-- **Interdependence is the real social engine.** Broken bones need a carer. Large game needs a group. A firing needs someone tending while you sleep. The systems generate need, and need generates society. Nothing needs to enforce it.
+- **A hearth defines a home.** A lit, maintained hearth marks a place as occupied — and it broadcasts you, because smoke is visible for miles. Hiding means giving up fire, which in this climate means something.
+- **Property is possession plus convention.** The game will not stop you taking things. Maker's marks mean it may be obvious who made what.
+- **Interdependence is the real social engine.** A broken leg needs a carer for weeks. Large game needs a group. A kiln firing needs tending while you sleep. Winter needs more hands than any one person has. The systems generate need; need generates society. Nothing has to enforce it.
 
-## 6. Roleplay affordances (all mechanically neutral, all optional)
+## 7. Roleplay affordances
 
-Things players can make that the game gives shape to but no meaning:
+Instruments, all mechanically neutral, all optional, none explained:
 
-- **Burial and graves.** A body can be interred, cairned, or marked. Graves persist and are recorded. Grave goods stay with the grave.
-- **Ornament.** Feather work, beadwork from bone and stone, pigment body-marking, scarification, tattooing with ochre and needle, teeth and claw pendants. Deep customisation with real material costs. In a world where everything is feathered, **feather ornament is the natural aesthetic language** and we should invest heavily in it.
-- **The calendar.** Solstice-marking alignments are *mechanically useful* (predicting winter's onset), which means observatories get built for practical reasons and then become ceremonial, which is exactly how it happened in reality.
-- **Fire ceremony.** A hearth that has never gone out has a tracked continuous-burn duration. That number is meaningless mechanically. Players will care about it enormously.
-- **Naming.** Places, animals (a specific *Yutyrannus* individual can be named, and the name propagates through the Record), tools, people.
-- **Music.** Bone flutes are real, ancient, and buildable here. Percussion, whistles, drums from hide. Let players actually play them.
+- **Burial.** Bodies can be interred, cairned, burned, exposed, marked, or ignored. Graves persist. Grave goods stay. What a settlement does with its dead is one of the first things it will have to decide, and there is no default.
+- **Ornament.** Feather work, bone and stone beads, pigment, scarification, ochre tattooing, teeth and claw pendants. In a world where nearly everything is feathered, **feather ornament is the natural aesthetic language** and deserves real investment.
+- **The calendar.** Solstice alignments are *mechanically useful* — predicting winter matters, and [the year is not 365 days](02-survival-systems.md#the-374-day-trap). So observatories get built for practical reasons and become ceremonial afterwards, which is precisely how it happened in reality.
+- **Fire.** A hearth that has never gone out carries a tracked continuous-burn duration. Mechanically meaningless. Players will care about it enormously.
+- **Names.** Places, animals, individual animals, tools, stars, seasons, people. Everything is unnamed until someone names it, and whether a name spreads is social.
+- **Music.** Bone flutes, whistles, hide drums, percussion. Real, ancient, buildable here, and the correct thing to be doing during an eleven-hour night by the fire. Let players actually play them.
 
-## 7. Multiplayer-facing technical constraints
+## 8. Multiplayer-facing technical constraints
 
-Detailed in [06](06-technical-architecture.md), but the design-relevant summary:
+Detailed in [06](06-technical-architecture.md); the design-relevant summary:
 
-- **Authoritative dedicated server.** The ecology sim must be server-side and single-source-of-truth.
-- **The world persists while offline.** The coarse ecology tier keeps running on a dedicated server. Come back after a week and the season has changed and the herds have moved. This is a feature, and it needs to be a clearly-communicated server setting because some groups will hate it.
-- **Proximity voice**, positional, with no global chat by default. In a game about teaching and shared knowledge, being unable to coordinate at distance is a *feature* — and it makes trail glyphs and signal fires genuinely necessary.
-- **Small player counts, deep simulation.** We are not building a 100-player persistent shard. 16 players in a deeply simulated valley is far more interesting than 200 in a shallow one, and it's achievable.
+- **Authoritative dedicated server.** The ecology sim is server-side, single source of truth.
+- **The clock never stops.** [1:1 real time](02-survival-systems.md#6-time--the-11-world-clock), running whether or not anyone is online. Logging off is how you skip time, which makes shelter design a question about *your absence* as much as your presence.
+- **Proximity voice, positional, no global chat.** In a game about teaching and shared knowledge, being unable to coordinate at distance is a feature — and it is what makes trail glyphs, signal fires, and written messages left at a cache genuinely necessary rather than flavour.
+- **Small player counts, deep simulation.** Sixteen people in a deeply simulated valley, not two hundred in a shallow one.

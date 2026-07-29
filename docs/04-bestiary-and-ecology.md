@@ -2,6 +2,8 @@
 
 The full machine-readable roster lives in [`data/species.yaml`](../data/species.yaml). This document covers the design thinking: how the ecosystem simulates, how animals behave, and the two ideas that make this game's wildlife different from every other survival game.
 
+> **None of these names exist in the game.** Genus names are how *we* talk about the animals. The player is never given a name, a label, a description, or a category for anything — see [00 §3](00-the-transplant.md#3-what-the-player-is-never-told). They will invent their own, and those are the only names the world has.
+
 ---
 
 ## 1. Pillar: naive fauna
@@ -41,7 +43,7 @@ What this buys us:
 
 - **Most animals want nothing to do with you.** The default response to a novel large biped is investigation, then avoidance.
 - **No aggro radius.** Animals have needs, senses, and states. A predator attacks because it is hungry and you look manageable, or because you are near its nest or kill.
-- **Vocalisation is tier C and labelled as such.** We have no fossil evidence for dinosaur sounds. Our reconstructions should be based on phylogenetic bracketing — the syrinx is a late avian innovation, so most of these animals likely produced **closed-mouth vocalisations, booms and hisses** rather than birdsong. The codex says so.
+- **Vocalisation is tier C and labelled as such.** We have no fossil evidence for dinosaur sounds. Our reconstructions should be based on phylogenetic bracketing — the syrinx is a late avian innovation, so most of these animals likely produced **closed-mouth vocalisations, booms and hisses** rather than birdsong. Design to that, and let the fact that these things boom rather than sing be one of the first genuinely alien discoveries a player makes.
 - **Display behaviour is where tier C earns its keep.** *Confuciusornis* had elongated tail streamers present in only some specimens — near-certainly sexual display. We can build gorgeous, entirely defensible courtship behaviour on that.
 - **Feathers do things.** Fluffing for insulation in cold, flattening in heat, raising in threat display, shaking off snow, preening, dust-bathing. A feathered animal that never behaves like a feathered animal is a wasted opportunity, and this stuff is cheap animation with enormous payoff.
 - **Nesting and parental care.** Brooding posture in oviraptorosaurs is tier B and directly attested in relatives. Nests are a resource (eggs) with a consequence (angry parent, and a hit to the population number).
@@ -98,7 +100,7 @@ The Yixian saw the **largest insect diversification of the entire Mesozoic**. Th
 - ***Eosestheria*** clam shrimp — ephemeral pool blooms, edible, tedious, reliable.
 - ***Coptoclava longipoda*** — a large predatory aquatic beetle larva. Unpleasant surprise in the shallows.
 - **Long-proboscid scorpionflies** (*Mesopsyche*, *Vitimopsyche*) — Mesozoic gymnosperm pollinators. Pure ambience, and a detail that will make entomologists lose their minds with joy.
-- **No honeybees.** No honey. Flag it in the codex, because the absence is itself interesting.
+- **No honeybees. No honey.** A modern player will look for it, because everyone knows honey is the thing you find in a hollow tree. It is not here, and nothing will ever tell them why. (Social corbiculate bees are an angiosperm-era radiation, and this world has five species of flowering plant.)
 
 ## 5. What the player can't do
 
