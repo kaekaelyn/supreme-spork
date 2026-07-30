@@ -10,9 +10,14 @@ namespace ElderWorld.Core.Tests;
 /// </summary>
 public class FireTests
 {
+    // Uses the genuinely coldest instant near a solstice, not a fixed phase — see
+    // DeepWinterFixture. A fire that "carries the whole night" has to be tested
+    // against the worst a night actually gets, not an arbitrarily mild sample of one.
     private static EnvironmentSample WinterNight(SiteContext? site = null)
-        => new ClimateModel(2024).Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), site ?? SiteContext.ForestUnderstory);
+    {
+        var climate = new ClimateModel(2024);
+        return climate.Sample(DeepWinterFixture.ColdestNightSeconds(climate), site ?? SiteContext.ForestUnderstory);
+    }
 
     private static Hearth OpenCampfire()
     {
@@ -207,8 +212,10 @@ public class FireTests
         for (int i = 0; i < 8; i++)
             hearth.AddFuel(new FuelPiece(FuelSpecies.HardWood, 1.0, 0.18, 0.10));
 
-        double nightHours = SolarPosition.NightLengthHours(0.03);
-        hearth.Advance(WinterNight(), nightHours * 3600.0);
+        var climate = new ClimateModel(2024);
+        double coldestSeconds = DeepWinterFixture.ColdestNightSeconds(climate);
+        double nightHours = SolarPosition.NightLengthHours(WorldClock.Restore(coldestSeconds).YearPhase);
+        hearth.Advance(climate.Sample(coldestSeconds, SiteContext.ForestUnderstory), nightHours * 3600.0);
 
         Assert.True(hearth.IsAlive,
             $"A banked fire should still be alive after {nightHours:F1} h; bed was {hearth.BedTemperatureC:F0} °C.");
@@ -356,9 +363,14 @@ public class FireTests
 /// </summary>
 public class EmberTests
 {
+    // Uses the genuinely coldest instant near a solstice, not a fixed phase — see
+    // DeepWinterFixture. A fire that "carries the whole night" has to be tested
+    // against the worst a night actually gets, not an arbitrarily mild sample of one.
     private static EnvironmentSample WinterNight(SiteContext? site = null)
-        => new ClimateModel(2024).Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), site ?? SiteContext.ForestUnderstory);
+    {
+        var climate = new ClimateModel(2024);
+        return climate.Sample(DeepWinterFixture.ColdestNightSeconds(climate), site ?? SiteContext.ForestUnderstory);
+    }
 
     private static double LifetimeHours(Ember ember, EnvironmentSample environment, bool sheltered)
     {

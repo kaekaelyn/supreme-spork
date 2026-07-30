@@ -72,11 +72,13 @@ Measured over a full simulated year at the basin floor:
 | | Model | Design |
 |---|---|---|
 | Mean annual | **7.0 °C** | ~7 °C |
-| Absolute minimum | **−17.6 °C** open, **−20.2 °C** in the forest | ~−20 °C |
+| Absolute minimum (open ground) | **−17.6 °C** | ~−20 °C |
 | Absolute maximum | **23.4 °C** | ~24 °C |
 | Months below freezing | **4.4** | 4–5 |
 
 Sky radiant temperature is computed rather than approximated, because the gap is a first-order survival fact: a clear cold night's sky sits **26.9 K below air temperature**, an overcast one **3.2 K**. That difference is worth around 40 W to a standing person, which is the difference between a survivable night and a fatal one.
+
+**Canopy makes the air under it warmer at night, not colder — found as a bug, not designed in.** An earlier version of this model reduced wind under canopy (correctly — see `SiteContext.WindExposure`) but let that same reduction *amplify* the nighttime diurnal swing through the "calm air lets a radiative inversion build" mechanism above, with nothing counteracting it. The result was a forest that measured colder overnight than open ground at the same elevation — backwards from how real forest microclimates behave: canopy intercepts outgoing longwave and re-emits part of it downward, so forest floors are frost refugia and nearby clearings are frost pockets on the same clear, calm night (this is standard agricultural-meteorology microclimate science, not specific to this project). Fixed by giving `SiteContext.SkyViewFactor` — already used for a person's radiant environment — the same damping effect on the *ambient air*: closed canopy behaves like a site-fixed cloud layer it can never see past. At the coldest instant of a simulated year, open ground now reads **−18.3 °C** against **−15.2 °C** in the forest, the physically correct direction, and `CanopySuppressesNightCoolingRatherThanAmplifyingIt` in `ClimateTests` pins it so it cannot regress silently. This also strengthened the intended design fact in [02 §1](02-survival-systems.md#1-thermal-model--the-primary-killer) rather than weakening it: the forest now buys survival time for two independent reasons (less wind chill *and* warmer air) instead of one.
 
 ### The thermal model ([02 §1](02-survival-systems.md#1-thermal-model--the-primary-killer))
 
@@ -95,7 +97,7 @@ Two behaviours worth calling out because neither is scripted:
 - **Ventilation limits output.** Real fires are air-limited, not fuel-limited. Piling on ten times the kindling gives about five times the fire and mostly just makes it last longer.
 - **Banking works, and falls out of one number.** Combustion below a fuel's ignition point still smoulders, and smouldering has no plume, so nearly all its output stays in the coals. The same ash blanket that starves a fire of oxygen also stops it radiating. So closing a fire down makes it dim, slow and *long* — a stone hearth with 8 kg of thick hardwood is still alive after a 14.7-hour night.
 
-The fumarole ember-carry works: a well-wrapped ember lasts 3.7 h, a loosely wrapped one 1.3 h, one in an open hand 18 minutes. Heavy rain kills it; drizzle does not.
+The fumarole ember-carry works: a well-wrapped ember lasts 3.7 h, a loosely wrapped one 0.9 h, one in an open hand 11 minutes. Heavy rain kills it; drizzle does not.
 
 ## 4. The documented reference scenarios
 
@@ -107,22 +109,25 @@ The fumarole ember-carry works: a well-wrapped ember lasts 3.7 h, a loosely wrap
 
 That is longer than intuition suggests and it is right. Still air at +5 °C is survivable for a long time: maximal shivering makes around 350 W against roughly 250 W of loss once the skin has cooled and the shell has closed down. What actually kills is *fuel* — shivering burns the glycogen reserve, and when that runs low shivering fades and the core falls away. The first-night killer in this game is winter, not a mild afternoon.
 
-**A midwinter night, −17 °C, against a 14.7-hour night:**
+**The genuinely coldest instant a simulated year produces** (not an arbitrary fixed date — see the box below), open ground at **−18.3 °C**, forest at **−15.2 °C**, against a 14.7-hour night:
 
 | | Confusion | Death |
 |---|---|---|
-| Naked, open ground | 5.6 h | **8.2 h** |
-| Naked, forest understory | 8.0 h | **11.4 h** |
-| Naked, lying on bare ground | 6.7 h | 9.8 h |
-| Naked, curled on a bough bed | 9.4 h | 13.3 h |
-| Naked, sitting at a fire | 11.6 h | 16.9 h |
-| Rawhide wrap at a fire | 26.1 h | survives |
-| Full down and hide | — | survives, core 36.7 °C |
-| **Soaked** down and hide | 7.4 h | 10.5 h |
+| Naked, open ground | 6.4 h | **9.1 h** |
+| Naked, forest understory | 10.5 h | **14.9 h** |
+| Naked, lying on bare ground | 7.5 h | 11.0 h |
+| Naked, curled on a bough bed | 12.2 h | 17.4 h |
+| Naked, sitting at a fire, sheltered | — | survives to dawn |
+| Full down and hide | — | survives, core 36.6 °C |
+| **Soaked** down and hide | 7.7 h | 10.9 h |
 
-Which is the shape the design asks for. A naked player in the open dies well before dawn. The forest buys hours without being told to. A fire and a shelter get you to morning and leave you miserable, which [03 §3](03-technology-and-crafting.md#tier-0--the-first-hour-naked) says is correct. Wet down is worse than no promise at all.
+Which is the shape the design asks for. A naked player in the open dies well before dawn. The forest buys hours without being told to, for two independent reasons now (§3's canopy fix). A fire and a shelter get you to morning and leave you cold — [03 §3](03-technology-and-crafting.md#tier-0--the-first-hour-naked) says a player who does everything right on night one is "still cold and miserable," and the model agrees: `AFireAndAShelterTurnALethalNightIntoAMiserableOne` requires survival to dawn *and* a core still measurably below normal when it arrives.
 
-Cold water is a countdown in minutes: incapacitation at 53 minutes in autumn water, death at 3.3 h.
+**Rawhide plus a tended fire is a genuine equilibrium, not a stopgap — but it needs the fire.** Tier 1's untailored hide wrap ([03 §3](03-technology-and-crafting.md#tier-1--stone-and-cordage)) at a 300 W/m² fire settles into a stable core (36.6 °C) that holds indefinitely — the same steady state full down and hide reaches with no fire at all. Take the fire away and the identical clothing holds that equilibrium only as long as the glycogen reserve funds the shivering it takes to hold it: reserve runs out around 15 hours, heat production collapses, and the core follows it down to death within another 5–9 hours. `RawhideNeedsATendedFireButDownAndHideDoesNot` in `ThermalReferenceScenarioTests` pins both halves of that, because the interesting design fact here is not "tier 1 is worse than tier 3" but *where* the two solutions actually differ: tier 3 is the one that doesn't need anyone awake feeding it.
+
+Cold water is a countdown in minutes: incapacitation at 44 minutes in autumn water, death at 2.7 h.
+
+> **On "the coldest instant."** Earlier drafts of this table used a fixed year-phase (11 days after the solstice) on the assumption that it represented "deep winter." It measured a comparatively mild −11.2 °C, not because the model is wrong but because a single fixed phase is a roll of the dice against `SynopticAmplitudeC`'s seed-dependent weather — for this seed the year's actual coldest moment lands two days *before* the solstice, not three weeks after it. `DeepWinterFixture` now searches a window around the solstice for the coldest sample instead of trusting one date to be representative, which is what a claim like "down and hide should not be lethal" needs to be tested against to mean anything.
 
 ## 5. Time-scale invariance
 
@@ -145,15 +150,19 @@ Stage 1 scope only. None of this is a gap in the sense of being forgotten:
 - **Fuel is unlimited.** Gathering is Stage 2; the greybox hands you deadwood so the night can be tested.
 - **Placeholder audio.** Synthesised wind and fire, because Stage 1 ships no assets. [09 §6](09-assets-and-production.md#6-audio--your-real-graphics-budget) is right that this is worth doing early — it changes how the greybox feels — and equally right that the real thing is a field recorder.
 
-## 7. Three internal contradictions, found and fixed
+## 7. Internal contradictions and a real bug, found and fixed
 
-Found while building Stage 1, and resolved directly in the design documents rather than left as a standing trap for whoever reads them next. Recorded here so the reasoning survives even though the documents themselves now agree.
+Found while building Stage 1, and resolved directly in the design documents and the code — not left as a standing trap for whoever reads them next, and not just noted and left broken. Recorded here so the reasoning survives even though the documents and the model now agree with themselves.
 
 **The engine.** [08 §12](08-decisions.md#12-engine--godot-4-revised) settles on Godot 4 with C#, but [06 §1](06-technical-architecture.md#1-engine) still recommended Unreal 5.4+, and [09 §2](09-assets-and-production.md#2-the-tool-stack)'s tool table still listed Unreal as the engine and leaned on free Megascans access — the very thing decision 12 says stopped being true and therefore decided against Unreal. **Fixed:** 06 §1 now leads with Godot and keeps the Unreal analysis only as a clearly marked superseded reasoning trail; 09's tool table, its Nanite reference in §4.4, and its UE5 PCG mention in §5.4 are updated to Godot's actual constraints (no Nanite, no built-in PCG framework, Megascans no longer free).
 
-**The climate numbers couldn't all be true at once.** [01 §2](01-the-science.md#2-climate--the-single-most-important-fact) gives a mean of 7 °C with extremes of −20 °C and +24 °C. The midpoint of those extremes is +2 °C, not +7 °C, so no symmetric model reaches all three. **Fixed:** 01 §2 now carries an implementation note explaining the resolution — a cold-skewed distribution, because snow cover plus long clear nights plus calm air build strong winter inversions with no summer analogue — so any future implementation is built cold-skewed from the start rather than discovering the contradiction the way this one did. See `ClimateParameters.WinterDiurnalBoostC` for where that asymmetry lives in code.
+**The climate numbers couldn't all be true at once.** [01 §2](01-the-science.md#2-climate--the-single-most-important-fact) gives a mean of 7 °C with extremes of −20 °C and +24 °C. The midpoint of those extremes is +2 °C, not +7 °C, so no symmetric model reaches all three. **Fixed:** 01 §2 now carries an implementation note explaining the resolution — a cold-skewed distribution, because snow cover plus long clear nights plus calm air build strong winter inversions with no summer analogue. Checked, not just asserted: a real analog at comparable latitude and elevation (Erzurum, Turkey — 39.9° N, 1,900 m, semi-arid continental) has an annual mean of 5.0–7.4 °C against a record low of −41 °C and record high of 36 °C, which is a considerably *more* aggressive cold skew than this model produces. So any future implementation should be built cold-skewed from the start rather than discovering the contradiction the way this one did. See `ClimateParameters.WinterDiurnalBoostC` for where that asymmetry lives in code.
 
-**Midwinter nights were stated as "fifteen or sixteen" hours; they are 14.7.** [02 §6](02-survival-systems.md#the-long-night) said nights *"run to fifteen or sixteen in midwinter."* Computed honestly from the 42° N of [01 §1](01-the-science.md#1-when-and-where) and a 23.44° axial tilt, the winter solstice gives 8.71 h of daylight and therefore a 14.69 h night; sixteen would need roughly 50° N. **Fixed:** 02 §6 now states 14.7 h with a note explaining the correction and why the mean night of 11.70 h was already exactly right.
+**A real bug: the forest was modelled colder at night than open ground.** Not a documentation mismatch — the climate model's `AirTemperatureAt` used a site's wind exposure to modulate the nighttime diurnal swing (calm air lets a radiative inversion build harder, which is real and correct on open ground) but never touched `SiteContext.SkyViewFactor`. Since forest reduces wind, forest got *more* calm-air amplification of the nighttime dip with nothing counteracting it — backwards from how real forest microclimates behave. Canopy intercepts outgoing longwave and re-emits part of it downward, which is why forest floors are frost refugia and adjacent clearings are frost pockets on the same clear, calm night; this is standard agricultural-meteorology microclimate science, not a project-specific claim. The symptom was visible in the very first calibration run — forest read 2.7 °C colder than open ground at the identical instant — and got reported in an earlier draft of this document without the direction being questioned. **Fixed:** canopy now damps the diurnal swing the same way cloud cover does, using the same `SkyViewFactor` the thermal model already used for a person's radiant environment. Open ground is untouched (`SkyViewFactor = 1.0` there, so the damping term is a no-op); forest at the same instant now reads warmer, not colder, and `CanopySuppressesNightCoolingRatherThanAmplifyingIt` in `ClimateTests` pins the direction. This also strengthens the forest-shelter design claim in [02 §1](02-survival-systems.md#1-thermal-model--the-primary-killer) rather than undermining it — see §3 above for the corrected figures.
+
+**The "documented reference scenario" numbers weren't testing what they claimed to.** Several tests in `ThermalReferenceScenarioTests` sampled a fixed year-phase (11 days after the solstice) intending it to represent "deep winter," and this document reported numbers computed from a *different*, uncommitted probe that had actually searched for the coldest night of the year. The fixed-phase tests were correct — they just tested a milder night (−11.2 °C) than the −17 to −18 °C this document claimed, because `SynopticAmplitudeC`'s seed-dependent weather can put the year's actual coldest instant anywhere across several weeks around the solstice — for this seed, two days *before* it. One test comment separately asserted "should not be lethal at −15 °C" for a scenario that was never actually run at −15 °C. **Fixed:** `DeepWinterFixture` now searches a window around the solstice for the coldest sample rather than trusting one fixed date, all `ThermalReferenceScenarioTests`/`FireTests`/`EmberTests` deep-winter scenarios use it, and §4 above reports the numbers those tests actually produce. One consequence worth keeping: "down and hide should not be lethal" is now verified against the year's genuine worst case, not an arbitrary mild sample of one — a stronger claim than the one that shipped first.
+
+**A published number with no test behind it.** This document's original "rawhide wrap at a fire: 26.1 h confusion, survives" row came from a one-off probe script, not from anything committed — there was no assertion anywhere backing that specific figure. Investigating it turned up a more interesting and more accurate finding than the number it replaced: rawhide plus a *tended* fire reaches a genuine steady-state equilibrium (indefinitely sustainable, not merely delayed failure), while the same clothing without the fire holds that equilibrium only as long as glycogen funds the shivering, then fails within hours of running out. **Fixed:** added `RawhideNeedsATendedFireButDownAndHideDoesNot`, which asserts both halves, and §4 above reports the finding instead of a single unverified number.
 
 ## 8. The gate
 

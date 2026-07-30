@@ -124,13 +124,27 @@ public sealed class ClimateModel
 
         // Clear, calm air swings hardest: cloud traps outgoing longwave and wind
         // mixes the surface layer, and both flatten the daily range. This is the
-        // mechanism that makes a still clear night the dangerous one.
+        // mechanism that makes a still clear night the dangerous one — on open
+        // ground.
         double clearness = 1.0 - 0.65 * cloudCover;
         double calmness = 1.0 / (1.0 + 0.25 * windSpeed);
 
+        // Canopy is a second, independent source of the same damping, and it must
+        // be modelled separately from wind rather than left to fall out of it.
+        // Forest reduces wind, which — through calmness alone — would make forest
+        // nights swing *harder* than the open, with nothing to counteract it. That
+        // is backwards: real canopy intercepts outgoing longwave and re-emits part
+        // of it downward, which is why forest floors are frost refugia and nearby
+        // clearings are frost pockets on the same clear, calm night. Modelled with
+        // the same "how much cold sky can this air actually see" quantity the
+        // thermal model already uses for a person's radiant environment
+        // (SiteContext.SkyViewFactor), so a closed canopy behaves like a
+        // site-fixed cloud layer it can never see past.
+        double canopyShelter = 1.0 - 0.65 * (1.0 - site.SkyViewFactor);
+
         double halfRange =
             (_parameters.SummerDiurnalHalfRangeC + _parameters.WinterDiurnalBoostC * winterness)
-            * clearness * calmness;
+            * clearness * calmness * canopyShelter;
 
         double lapse = (site.ElevationMetres - _parameters.ReferenceElevationMetres)
                        / 1000.0 * _parameters.LapseRateCPerKm;

@@ -99,12 +99,12 @@ public class ThermalReferenceScenarioTests
         // The whole premise of docs/02 §1: "The most likely first-session death is
         // hypothermia, not predation, and that is correct and intentional."
         var climate = new ClimateModel(2024);
-        EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.OpenGround);
+        double coldestSeconds = DeepWinterFixture.ColdestNightSeconds(climate);
+        EnvironmentSample night = climate.Sample(coldestSeconds, SiteContext.OpenGround);
 
         Outcome outcome = Run(ThermalExposure.Naked(night));
 
-        double nightLength = SolarPosition.NightLengthHours(0.03);
+        double nightLength = SolarPosition.NightLengthHours(WorldClock.Restore(coldestSeconds).YearPhase);
         Assert.True(outcome.ToDeathHours > 0 && outcome.ToDeathHours < nightLength,
             $"A naked player in the open should not survive a {nightLength:F1} h winter night " +
             $"(died at {outcome.ToDeathHours:F1} h).");
@@ -117,7 +117,7 @@ public class ThermalReferenceScenarioTests
         // understory is a legible, learnable map feature. Reading terrain for shelter
         // is a skill." Nothing tells the player this; the forest simply kills slower.
         var climate = new ClimateModel(2024);
-        double when = WorldClock.AtSeason(0.03, timeOfDay: 0.0);
+        double when = DeepWinterFixture.ColdestNightSeconds(climate);
 
         Outcome open = Run(ThermalExposure.Naked(climate.Sample(when, SiteContext.OpenGround)));
         Outcome forest = Run(ThermalExposure.Naked(climate.Sample(when, SiteContext.ForestUnderstory)));
@@ -133,8 +133,8 @@ public class ThermalReferenceScenarioTests
         // docs/03 §3 on tier 0: "Goal: survive the first night. A player who does
         // everything right is still cold and miserable. That's correct."
         var climate = new ClimateModel(2024);
-        EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.DebrisShelter);
+        double coldestSeconds = DeepWinterFixture.ColdestNightSeconds(climate);
+        EnvironmentSample night = climate.Sample(coldestSeconds, SiteContext.DebrisShelter);
 
         Outcome outcome = Run(new ThermalExposure
         {
@@ -144,7 +144,7 @@ public class ThermalReferenceScenarioTests
             ActivityMet = 1.0,
             FireIrradianceWattsPerM2 = 300.0,
             BeddingResistance = 0.3,
-        }, maxHours: SolarPosition.NightLengthHours(0.03));
+        }, maxHours: SolarPosition.NightLengthHours(WorldClock.Restore(coldestSeconds).YearPhase));
 
         Assert.True(outcome.ToDeathHours < 0, "A fire and a shelter should get you to dawn.");
         Assert.True(outcome.Final.CoreTemperatureC < ThermalState.NormalCoreC - 0.3,
@@ -152,13 +152,63 @@ public class ThermalReferenceScenarioTests
     }
 
     [Fact]
+    public void RawhideNeedsATendedFireButDownAndHideDoesNot()
+    {
+        // docs/03 §3's tier 1 — a first, untailored hide wrap — and its tier 3 down
+        // and hide set are not the same kind of solution, and the difference is not
+        // "tier 3 feels warmer". Verified below: rawhide plus a tended fire holds a
+        // genuine steady-state core (a real energy balance, not just delaying the
+        // inevitable) about as well as down and hide manages with *no* fire at all.
+        // The real gap is what happens once nobody is feeding the fire — take it away
+        // and the same rawhide layer only holds that equilibrium for as long as
+        // glycogen lasts, then heat production collapses and the core follows. A
+        // single night is not always enough to expose that (the two can arrive at
+        // opposite outcomes within a few minutes of each other, which would make a
+        // single-night window a coin flip), so this checks a window well past the
+        // point the fireless case's fuel reserve actually runs out.
+        var climate = new ClimateModel(2024);
+        double coldestSeconds = DeepWinterFixture.ColdestNightSeconds(climate);
+        EnvironmentSample night = climate.Sample(coldestSeconds, SiteContext.ForestUnderstory);
+        const double WindowHours = 24.0;
+
+        Outcome rawhideWithFire = Run(new ThermalExposure
+        {
+            Environment = night,
+            Clothing = Insulation.RawhideWrap,
+            Posture = Posture.Sitting,
+            ActivityMet = 1.0,
+            FireIrradianceWattsPerM2 = 300.0,
+            BeddingResistance = 0.3,
+        }, maxHours: WindowHours);
+
+        Outcome rawhideAlone = Run(new ThermalExposure
+        {
+            Environment = night,
+            Clothing = Insulation.RawhideWrap,
+            Posture = Posture.Standing,
+            ActivityMet = 1.2,
+        }, maxHours: WindowHours);
+
+        Assert.True(rawhideWithFire.ToDeathHours < 0,
+            $"Rawhide and a tended fire should hold a stable core for {WindowHours:F0} h, " +
+            $"ended at {rawhideWithFire.Final.CoreTemperatureC:F2} °C.");
+        Assert.True(rawhideAlone.ToDeathHours is > 0 && rawhideAlone.ToDeathHours < WindowHours,
+            $"Rawhide alone, without a fire, should not last {WindowHours:F0} h once its energy " +
+            $"reserve runs out — the fire is doing real work, not decoration " +
+            $"(died at {rawhideAlone.ToDeathHours:F1} h).");
+    }
+
+    [Fact]
     public void DownAndHideMakeAWinterNightSurvivable()
     {
         // docs/03 §3: "Down-stuffed garments and bedding — the single most valuable
-        // technology in the game." This is what the whole first year is for.
+        // technology in the game." This is what the whole first year is for. Tested
+        // against the coldest instant of the year this seed produces, not an
+        // arbitrary winter sample — "should not be lethal" has to hold at the worst
+        // case, or it is not really the claim docs/03 is making.
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.OpenGround);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.OpenGround);
 
         Outcome outcome = Run(new ThermalExposure
         {
@@ -168,7 +218,9 @@ public class ThermalReferenceScenarioTests
             ActivityMet = 1.2,
         });
 
-        Assert.True(outcome.ToDeathHours < 0, "Full down and hide should not be lethal at −15 °C.");
+        Assert.True(outcome.ToDeathHours < 0,
+            $"Full down and hide should not be lethal even at the year's coldest instant " +
+            $"({night.AirTemperatureC:F1} °C).");
         Assert.True(outcome.Final.CoreTemperatureC > 36.0,
             $"Core should stay near normal, was {outcome.Final.CoreTemperatureC:F2} °C.");
     }
@@ -179,7 +231,7 @@ public class ThermalReferenceScenarioTests
         // docs/02 §1: "being wet multiplies conductive loss catastrophically."
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.OpenGround);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.OpenGround);
 
         Outcome dry = Run(new ThermalExposure
         {
@@ -226,7 +278,7 @@ public class ThermalReferenceScenarioTests
         // The physical justification for a bough bed being real technology.
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.ForestUnderstory);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.ForestUnderstory);
 
         Outcome bareGround = Run(new ThermalExposure
         {
@@ -251,7 +303,7 @@ public class ThermalReferenceScenarioTests
         // docs/02 §1: "You cannot stay warm while starving."
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.ForestUnderstory);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.ForestUnderstory);
 
         var exposure = ThermalExposure.Naked(night);
 
@@ -280,7 +332,7 @@ public class ThermalReferenceScenarioTests
         // cold while you are still entirely lucid.
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.ForestUnderstory);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.ForestUnderstory);
 
         var model = new ThermalModel();
         var state = ThermalState.Fresh();
@@ -301,7 +353,7 @@ public class ThermalReferenceScenarioTests
         // technology available and why nothing in the game will point that out.
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.ForestUnderstory);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.ForestUnderstory);
 
         var model = new ThermalModel();
         var state = ThermalState.Fresh();
@@ -318,7 +370,7 @@ public class ThermalReferenceScenarioTests
         // consequences are what make cold frightening instead of annoying."
         var climate = new ClimateModel(2024);
         EnvironmentSample night = climate.Sample(
-            WorldClock.AtSeason(0.03, timeOfDay: 0.0), SiteContext.OpenGround);
+            DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.OpenGround);
 
         var model = new ThermalModel();
         var state = ThermalState.Fresh();
@@ -413,7 +465,7 @@ public class ThermalReferenceScenarioTests
 
         var climate = new ClimateModel(2024);
         model.Step(state, ThermalExposure.Naked(
-            climate.Sample(WorldClock.AtSeason(0.03), SiteContext.OpenGround)));
+            climate.Sample(DeepWinterFixture.ColdestNightSeconds(climate), SiteContext.OpenGround)));
 
         Assert.True(state.ShiveringHeatWatts < 100.0,
             $"Shivering should have largely failed by 30.5 °C, was {state.ShiveringHeatWatts:F0} W.");

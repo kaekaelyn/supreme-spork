@@ -130,6 +130,32 @@ public class ClimateTests
     }
 
     [Fact]
+    public void CanopySuppressesNightCoolingRatherThanAmplifyingIt()
+    {
+        // A real, well-documented microclimate effect, not a design nicety: canopy
+        // intercepts outgoing longwave and re-emits part of it downward, so forest
+        // floors are frost refugia and nearby clearings are frost pockets on the
+        // same clear, calm night. Reduced wind alone pushes the opposite way —
+        // calmer air lets a radiative inversion build harder — so this asserts the
+        // canopy term wins rather than trusting the reasoning in a comment. Caught a
+        // real bug during Stage 1 development: without this term, closed forest
+        // measured colder overnight than open ground, backwards from how forests
+        // actually behave.
+        var climate = new ClimateModel(Seed);
+
+        foreach (double phase in new[] { 0.03, 0.90 }) // deep winter and late autumn nights
+        {
+            double when = WorldClock.AtSeason(phase, timeOfDay: 0.0);
+            EnvironmentSample open = climate.Sample(when, SiteContext.OpenGround);
+            EnvironmentSample forest = climate.Sample(when, SiteContext.ForestUnderstory);
+
+            Assert.True(forest.AirTemperatureC >= open.AirTemperatureC,
+                $"At phase {phase}, forest ({forest.AirTemperatureC:F1} °C) should not be colder " +
+                $"than open ground ({open.AirTemperatureC:F1} °C) at the same elevation overnight.");
+        }
+    }
+
+    [Fact]
     public void TheColdestPartOfTheYearIsNotTheSolstice()
     {
         // Real seasonal lag, and quietly a trap: a player dating the solstice by feel
