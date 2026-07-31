@@ -30,7 +30,7 @@ public class CalendarTests
     {
         // The whole 1:1 premise. A year takes a year.
         double realYearSeconds = 365.25 * 24 * 3600;
-        Assert.Equal(realYearSeconds, CretaceousCalendar.SecondsPerYear, 6);
+        Assert.Equal(CretaceousCalendar.SecondsPerYear, realYearSeconds, 6);
     }
 
     [Fact]
