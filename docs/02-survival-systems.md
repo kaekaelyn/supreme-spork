@@ -127,7 +127,9 @@ This is also why a stone alignment on the ridge is a real piece of infrastructur
 
 ### The long night
 
-Nights average 11.7 real hours and run to fifteen or sixteen in midwinter. That is not a problem to be minimised; it is a design brief.
+Nights average 11.7 real hours and run to about **14.7 hours in midwinter**. That is not a problem to be minimised; it is a design brief.
+
+*(The 42° N paleolatitude of [01 §1](01-the-science.md#1-when-and-where) and a 23.44° axial tilt fix midwinter night length exactly, at 14.69 h — closer to fifteen hours than sixteen. An earlier draft of this document said "fifteen or sixteen"; the computed figure supersedes it. Sixteen-hour nights would need something closer to 50° N.)*
 
 - **Night is when handwork happens.** Knapping, sewing, cordage, fletching, hide scraping, cooking, rendering, tending the fire, teaching, and writing are all *better done by firelight* — some of them exclusively so. This is historically exactly what people did all winter, and it means an eleven-hour night in a warm shelter is the most productive part of the day rather than dead time.
 - **Night is the social season.** In co-op, night is when everyone is at the hearth. That is where teaching happens, where the record gets written, and where whatever your settlement believes gets decided.

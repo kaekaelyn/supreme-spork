@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The simulation core. See docs/08-decisions.md §13.
+
+    THE ONE DISCIPLINE: this assembly must never reference a game engine.
+    No Godot types, no Node, no engine Vector3, no scene tree. That is what keeps
+    the headless soak tests of docs/06 §9 possible and preserves the portability
+    insurance if the engine choice is ever revisited.
+
+    ArchitectureTests fails the build if this is violated.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>ElderWorld.Core</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>

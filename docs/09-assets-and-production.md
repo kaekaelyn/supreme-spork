@@ -44,14 +44,14 @@ Free-first, with the paid accelerators actually worth buying flagged. Prefer ope
 
 | Job | Tool | Notes |
 |---|---|---|
-| **Engine** | **Unreal Engine 5.5+** | Nanite means static assets need little retopo — a genuine solo unlock. Lumen for under-canopy light. **Fab/Megascans access is on its own nearly decisive.** PCG framework for rules-based forest scattering |
+| **Engine** | **Godot 4** | Settled in [08 §12](08-decisions.md#12-engine--godot-4-revised): free with no royalty tier at any revenue, small readable codebase, C# keeps the simulation testable. No Nanite, so meshes need manual decimation/LODs; no built-in PCG framework, so rules-based scattering (§5.4) is either a community addon or hand-rolled |
 | **DCC hub** | **Blender** | Unavoidable and free. Blockout, retopo, rigging, cleanup, feather cards. This is the skill to learn first |
 | **2D generation** | **ComfyUI** + Flux/SD locally | Free, offline, and critically supports **ControlNet / IP-Adapter** — reference conditioning is what beats the bad prior. Midjourney is prettier and far less controllable; use it for mood exploration only |
 | **3D generation** | **Tripo** or **Meshy**; **Hunyuan3D** / **TRELLIS** locally | Genuinely good for props, rocks, tools, pottery. Treat creature output as a *base to rework*, never a finished asset |
 | **Retopology** | Blender QuadriFlow (free) or **Quad Remesher** (~$100) | Quad Remesher is the single best small purchase in this list |
 | **Trees** | **SpeedTree** (indie tier) or **The Grove** (Blender addon) | The Grove simulates botanical growth, which suits accurate morphologies. Trees are your hardest environment asset — see §5.2 |
 | **Terrain** | **Gaea** (free tier) or in-engine sculpt | Basin macro-layout is hand-authored per [06 §4](06-technical-architecture.md#4-world-generation) |
-| **Scans** | **Fab / Megascans** | Free with UE. Basalt, andesite, bark, moss, dirt, snow all exist as real photogrammetry |
+| **Scans** | **Fab / Megascans** | No longer free (Quixel-to-Fab migration completed 2026; individually priced or subscription-gated) and not bundled with Godot regardless — budget for it explicitly. Basalt, andesite, bark, moss, dirt, snow all exist as real photogrammetry, which is still worth paying for over building from scratch |
 | **Audio** | **Reaper** (cheap) + a field recorder + Freesound | See §6 |
 | **Ecology core** | Plain C++ or Rust, no engine | Per [06 §2](06-technical-architecture.md#2-the-two-tier-simulation--the-core-technical-bet). Also the best-case target for AI-assisted coding |
 
@@ -107,7 +107,7 @@ Either way, the mesh you get out is a **base**, not a deliverable.
 
 ### 4.4 Retopology and UVs
 
-Required for anything that animates — Nanite's skeletal support does not remove the need for sane deformation topology. Quad Remesher, or manual for hero animals. Edge loops around joints, mouth, and eyes.
+Required for anything that animates. Without Nanite, this step is fully load-bearing rather than partly optional — Godot needs sane deformation topology and reasonable poly counts on everything, not just hero animals. Quad Remesher, or manual for hero animals. Edge loops around joints, mouth, and eyes.
 
 ### 4.5 Feathers — the special problem
 
@@ -124,7 +124,7 @@ Whatever you choose, feathers must respond to **wet** (clumping and darkening) a
 Rig with Blender **Rigify**, adapted to a bird-like biped. Then:
 
 - **Video-to-motion from your ratite footage.** Video-to-motion is a standard pipeline feature now, and your setting makes it *scientifically correct* rather than a shortcut: these animals moved like large ground birds, so cassowary and emu gait is the right reference, free, and defensible. Nobody else's dinosaur game can say that.
-- **Procedural locomotion in-engine.** UE Control Rig with IK foot placement, motion warping, and spring-based body dynamics. You author a small number of cycles and the engine adapts them to terrain, speed, and slope. **For a solo dev this is the single biggest force multiplier in the document** — it turns "hundreds of animations" into "a few good ones plus systems."
+- **Procedural locomotion in-engine.** Godot's `SkeletonIK3D` for foot placement plus `AnimationTree` blend spaces and state machines for motion blending and terrain/speed adaptation — the same category of system as Unreal's Control Rig, built by hand rather than out of the box. You author a small number of cycles and the tooling adapts them to terrain, speed, and slope. **For a solo dev this is the single biggest force multiplier in the document** — it turns "hundreds of animations" into "a few good ones plus systems" — though expect more of it to be your own code than a Control Rig equivalent would have needed.
 - **Hand-author only the signature behaviours**: fluffing, snow-shake, preening, the tucked sleeping curl, threat display, feeding. A dozen short clips per animal, not hundreds.
 
 ### 4.7 Creature order
@@ -148,7 +148,7 @@ Build them in order of *ease*, not importance, so the pipeline matures on cheap 
 
 ### 5.1 Rocks, ground, and materials — nearly solved
 
-Megascans has real photogrammetric basalt, andesite, volcanic rock, bark, moss, dirt, gravel, and snow. Your job is **curation, not creation**. See the rejection checklist (§7).
+Megascans has real photogrammetric basalt, andesite, volcanic rock, bark, moss, dirt, gravel, and snow. It is no longer free (§2's Scans row), and importing it into Godot is manual rather than the one-click Fab-to-Unreal path, but paying for it is still cheaper than building the same library from scratch. Your job is **curation, not creation**. See the rejection checklist (§7).
 
 ### 5.2 Trees — your hardest environment asset
 
@@ -162,7 +162,7 @@ This is your fastest route to a world that looks genuinely alien without inventi
 
 ### 5.4 Scattering and assembly
 
-UE5's **PCG framework** — author *rules* (conifer forest with fern understory, density by slope and moisture, clearings near water) rather than placing plants. Rules scale; hand placement does not, and you are one person.
+Author *rules* (conifer forest with fern understory, density by slope and moisture, clearings near water) rather than placing plants. Rules scale; hand placement does not, and you are one person. Godot has no built-in equivalent of Unreal's PCG framework — the options are a community scattering addon (audit for maintenance before committing) or a small hand-rolled tool driven by the same rule data the ecology core already uses for habitat. Given [decision 13](08-decisions.md#13-ecology-core--same-language-as-the-engine-but-isolated-as-a-module)'s C# core, a hand-rolled scatterer is a modest build and keeps the rules in one place.
 
 ### 5.5 Sky, weather, VFX
 

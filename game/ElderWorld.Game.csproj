@@ -1,0 +1,28 @@
+<Project Sdk="Godot.NET.Sdk/4.5.2">
+
+  <!--
+    The engine layer: everything that knows what Godot is.
+
+    All simulation lives in ElderWorld.Core, which knows nothing about any engine
+    (docs/08 §13). Scripts here read the core and render it; they never make survival
+    decisions of their own.
+
+    The SDK version should match your Godot editor. If yours differs, change the
+    number above — Godot will usually offer to do it for you when you open the project.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>ElderWorld.Game</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\ElderWorld.Core\ElderWorld.Core.csproj" />
+  </ItemGroup>
+
+</Project>

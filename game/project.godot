@@ -1,0 +1,36 @@
+; Engine configuration file.
+;
+; The Elder World — Stage 1 greybox.
+; See docs/09-assets-and-production.md §8 for what Stage 1 is and is not.
+
+config_version=5
+
+[application]
+
+config/name="The Elder World"
+config/description="Stage 1 greybox: thermal model, fire, and a 23.4-hour day. No art."
+run/main_scene="res://scenes/Greybox.tscn"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+
+[dotnet]
+
+project/assembly_name="ElderWorld.Game"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+
+[physics]
+
+3d/default_gravity=9.8
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=2
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=2
+
+; The night has to be genuinely dark for the Stage 1 gate to mean anything, so
+; nothing here may quietly lift the black point.
+environment/defaults/default_clear_color=Color(0.02, 0.025, 0.04, 1)
+environment/defaults/default_environment=""

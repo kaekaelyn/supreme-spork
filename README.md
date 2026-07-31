@@ -50,8 +50,24 @@ You may not know where you are. You may not know *when* you are. Nothing in the 
 | [07 — Roadmap](docs/07-roadmap.md) | Prototype and vertical slice scope, team, risks |
 | [08 — Decisions](docs/08-decisions.md) | Settled design decisions and their reasoning |
 | [09 — Assets & Production](docs/09-assets-and-production.md) | The solo/AI-assisted production manual: pipeline, tools, order of work |
+| [10 — Stage 1: the greybox](docs/10-stage-1-greybox.md) | What is built, the reference scenario numbers, and what is deliberately absent |
 | [SOURCES.md](SOURCES.md) | Every scientific claim, cited, with verification status |
 | [data/](data/) | The paleobiota as versioned, open, machine-readable data |
+
+## Building it
+
+```bash
+dotnet test tests/ElderWorld.Core.Tests    # the simulation, headless — no engine needed
+dotnet build ElderWorld.sln                # everything, including the Godot assembly
+```
+
+Then open `game/` in Godot 4.5+ and press play. Controls and the current state of the
+prototype are in [10 — Stage 1](docs/10-stage-1-greybox.md).
+
+The simulation lives in `src/ElderWorld.Core`, which contains no engine types at all —
+[decision 13](docs/08-decisions.md#13-ecology-core--same-language-as-the-engine-but-isolated-as-a-module),
+enforced by a test. Everything in `game/` reads that core and renders it; nothing there
+makes a survival decision.
 
 ## Audience
 
